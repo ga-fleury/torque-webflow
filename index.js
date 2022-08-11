@@ -233,5 +233,5 @@ $('#btn-start-now', registrationFormContainer).on('click', function() {
 });
 
 $('#btn-go-back', registrationFormContainer).on('click', function() {
-    goToServiceTypeStep();
+    goToEarlyAccessStep();
 });
