@@ -34,29 +34,29 @@
 /**
  * A reference to the DOM container of the elements on the first step.
  */
-const earlyAccessStep = $('#early-access-step', registrationFormContainer);
+const earlyAccessStep = $('#early-access-step');
 
 /**
  * Reference to the HTML form element that contains the field inputs for the first
  * step on the Registration form (Company Profile).
  */
-const registrationForm = $('#registration-data-form', earlyAccessStep);
+const registrationForm = $('#registration-data-form');
 
 /**
  * Gets a reference to the "I don't have a DOT" checkbox field.
  */
-const getIdontHaveDotField = () => getFormField('#doNotHaveDot', registrationForm);
+const getIdontHaveDotField = () => getFormField('#doNotHaveDot');
 
 /**
  * Gets a reference to the DOT field.
  */
-const getDotField = () => getFormField('#dot', registrationForm);
+const getDotField = () => getFormField('#dot');
 
 /**
  * Gets the current registration type linked to this registration form.
  */
 const getRegistrationType = () => {
-    const registrationTypeElement = $('#registration-type', registrationForm);
+    const registrationTypeElement = $('#registration-type');
     const registrationTypeValue = registrationTypeElement.text().toLocaleLowerCase().trim();
     return REGISTRATION_TYPE[registrationTypeValue];
 }
@@ -66,18 +66,18 @@ const getRegistrationType = () => {
 /**
  * A reference to the DOM container of the elements on the step for address confirmation for known companies.
  */
-const serviceTypeStep = $('#service-type-step', registrationFormContainer);
+const serviceTypeStep = $('#service-type-step');
 
 /**
  * Reference to the HTML form element that contains the field inputs for the Address Confirmation for
  * known companies.
  */
-const knownAddressForm = $('#known-address-form', knownAddressConfirmStep);
+const knownAddressForm = $('#known-address-form');
 
 /**
  * Gets a reference to the known addresses options list (the radiobuttons container).
  */
-const getKnownAddressesOptionsList = () => $('#known-addresses-group', knownAddressConfirmStep);
+const getKnownAddressesOptionsList = () => $('#known-addresses-group');
 
 
 
@@ -86,32 +86,32 @@ const getKnownAddressesOptionsList = () => $('#known-addresses-group', knownAddr
 /**
  * A reference to the DOM container of the elements on the step for address confirmation for known companies.
  */
-const unknownAddressConfirmStep = $('#unknown-address-step', registrationFormContainer);
+const unknownAddressConfirmStep = $('#unknown-address-step');
 
 /**
  * Reference to the HTML form element that contains the field inputs for the Address Confirmation for
  * unknown companies.
  */
-const unknownAddressForm = $('#unknown-address-form', unknownAddressConfirmStep);
+const unknownAddressForm = $('#unknown-address-form');
 
 /**
  * Reference to the input field where users write a custom address for unknown companies.
  */
-const customAddressField = $('#custom-address', unknownAddressForm);
+const customAddressField = $('#custom-address');
 
 // ------------------------ STEP - ACCOUNT ALREADY EXISTS -----------------------------
 
 /**
  * A reference to the DOM container of the elements on the "account already exists" step.
  */
-const accountAlreadyExistsStep = $('#account-exists-step', registrationFormContainer);
+const accountAlreadyExistsStep = $('#account-exists-step');
 
 // ------------------------ STEP - ACCOUNT ALREADY EXISTS -----------------------------
 
 /**
  * A reference to the DOM container of the elements on the "account accepted" step.
  */
-const accountAcceptedStep = $('#account-accepted-step', registrationFormContainer);
+const accountAcceptedStep = $('#account-accepted-step');
 
 
 // ------------------------ STEP - ERROR SCREEN -----------------------------
@@ -119,7 +119,7 @@ const accountAcceptedStep = $('#account-accepted-step', registrationFormContaine
 /**
  * A reference to the DOM container of the elements on the "error" step.
  */
-const errorScreenStep = $('#register-error-step', registrationFormContainer);
+const errorScreenStep = $('#register-error-step');
 
 
 
@@ -138,8 +138,8 @@ const errorScreenStep = $('#register-error-step', registrationFormContainer);
  * Returns a reference to the Webflow Slider navigation control at the given index
  * @param {*} index 
  */
-export const getWebflowSliderNavigationControl = (index, sliderContainer) => {
-    const sliderNavContainer = $('.w-slider-nav', sliderContainer); // Webflow slider navigation container
+export const getWebflowSliderNavigationControl = (index) => {
+    const sliderNavContainer = $('.w-slider-nav'); // Webflow slider navigation container
     const navItems = $('.w-slider-dot', sliderNavContainer); // Webflow sider navigation items
     return $(navItems.get(index));
 };
@@ -149,7 +149,7 @@ export const getWebflowSliderNavigationControl = (index, sliderContainer) => {
  * @param {*} index 
  */
  const getRegistrationFormNavigationControl = (index) => {
-    return getWebflowSliderNavigationControl(index, registrationFormContainer);
+    return getWebflowSliderNavigationControl(index);
 };
 
 /**
@@ -222,6 +222,6 @@ const goToHowOftenStep = () => {
     triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.PHONE_NUMBER_STEP));
 };
 
-$('#btn-start-now', earlyAccessStep).on('click', function() {
+$('#btn-start-now').on('click', function() {
     goToServiceTypeStep();
 });
