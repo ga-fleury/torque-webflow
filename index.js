@@ -4,14 +4,16 @@
  */
  const REGISTRATION_FORM_STEPS = {
     EARLY_ACCESS_STEP: 0,
-    PROFILE_STEP: 1,
-    KNOWN_COMPANY_STEP: 2,
-    UNKNOWN_COMPANY_STEP: 3,
-    ACCOUNT_PENDING_STEP: 4,
-    ACCOUNT_ACCEPTED_STEP: 5,
-    ACCOUNT_REJECTED_STEP: 6,
-    ERROR_STEP: 7,
-    ACCOUNT_EXISTS_STEP: 8
+    SERVICE_TYPE_STEP: 1,
+    LOCATIONS_STEP: 2,
+    ZIP_CODE_STEP: 3,
+    FLEET_MAKEUP_STEP: 4,
+    FLEET_SIZE_STEP: 5,
+    HOW_OFTEN_STEP: 6,
+    BUSINESS_TYPE_STEP: 7,
+    ROLE_STEP: 8,
+    INFORMATION_STEP: 9,
+    PHONE_NUMBER_STEP: 10,
 }
 
 // ----------------------- Some shared DOM elements --------------------------------
@@ -149,3 +151,77 @@ export const getWebflowSliderNavigationControl = (index, sliderContainer) => {
  const getRegistrationFormNavigationControl = (index) => {
     return getWebflowSliderNavigationControl(index, registrationFormContainer);
 };
+
+/**
+ * Goes to the Registration Form "error" step.
+ */
+ const goToServiceTypeStep = () => {
+    triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.SERVICE_TYPE_STEP));
+};
+
+/**
+ * Goes to the Registration "success" screen.
+ */
+const goToLocationsStep = () => {
+    triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.LOCATIONS_STEP));
+};
+
+/**
+ * Goes to the screen for users with already existing accounts.
+ */
+const goToZipCodeStep = () => {
+    triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.ZIP_CODE_STEP));
+};
+
+/**
+ * Goes to the screen for users that were put on a Pending Account.
+ */
+const goToFleetMakeupStep = () => {
+    triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.FLEET_MAKEUP_STEP));
+};
+
+/**
+ * Goes to the screen for users that were rejected for Registration.
+ */
+const goToFleetSizeStep = () => {
+    triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.FLEET_SIZE_STEP));
+};
+
+/**
+ * Goes to the Registration form main screen.
+ */
+const goToHowOftenStep = () => {
+    triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.HOW_OFTEN_STEP));
+};
+
+/**
+ * Goes to the Registration form main screen.
+ */
+ const goToBusinessTypeStep = () => {
+    triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.BUSINESS_TYPE_STEP));
+};
+
+/**
+ * Goes to the Registration form main screen.
+ */
+ const goToRoleStep = () => {
+    triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.ROLE_STEP));
+};
+
+/**
+ * Goes to the Registration form main screen.
+ */
+ const goToInformationStep = () => {
+    triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.INFORMATION_STEP));
+};
+
+/**
+ * Goes to the Registration form main screen.
+ */
+ const goToPhoneNumberStep = () => {
+    triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.PHONE_NUMBER_STEP));
+};
+
+$('#btn-start-now').on('click', function() {
+    goToServiceTypeStep();
+});
