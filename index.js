@@ -224,4 +224,5 @@ const goToHowOftenStep = () => {
 
 $('#btn-start-now').on('click', function() {
     goToServiceTypeStep();
+    console.log("btn clicked")
 });
