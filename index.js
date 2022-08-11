@@ -127,7 +127,7 @@ const errorScreenStep = $('#register-error-step');
  * Manually triggers the given Webflow Slider navigation element/control
  * @param {*} navControl 
  */
- export const triggerWebflowSliderNavigationControl = (navControl) => {
+ const triggerWebflowSliderNavigationControl = (navControl) => {
     /*
         Triggering the "click" event causes navigation to occur
      */
@@ -138,7 +138,7 @@ const errorScreenStep = $('#register-error-step');
  * Returns a reference to the Webflow Slider navigation control at the given index
  * @param {*} index 
  */
-export const getWebflowSliderNavigationControl = (index) => {
+const getWebflowSliderNavigationControl = (index) => {
     const sliderNavContainer = $('.w-slider-nav'); // Webflow slider navigation container
     const navItems = $('.w-slider-dot', sliderNavContainer); // Webflow sider navigation items
     return $(navItems.get(index));
