@@ -34,7 +34,7 @@
 /**
  * A reference to the DOM container of the elements on the first step.
  */
-const earlyAccessStep = $('#early-access-step');
+const earlyAccessStep = $('#early-access-step', registrationFormContainer);
 
 /**
  * Reference to the HTML form element that contains the field inputs for the first
@@ -66,7 +66,7 @@ const getRegistrationType = () => {
 /**
  * A reference to the DOM container of the elements on the step for address confirmation for known companies.
  */
-const serviceTypeStep = $('#service-type-step');
+const serviceTypeStep = $('#service-type-step', registrationFormContainer);
 
 /**
  * Reference to the HTML form element that contains the field inputs for the Address Confirmation for
@@ -157,6 +157,7 @@ const getWebflowSliderNavigationControl = (index) => {
  */
  const goToServiceTypeStep = () => {
     triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.SERVICE_TYPE_STEP));
+    console.log("service type")
 };
 
 /**
