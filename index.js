@@ -66,7 +66,7 @@ const getRegistrationType = () => {
 /**
  * A reference to the DOM container of the elements on the step for address confirmation for known companies.
  */
-const knownAddressConfirmStep = $('#known-address-step', registrationFormContainer);
+const serviceTypeStep = $('#service-type-step', registrationFormContainer);
 
 /**
  * Reference to the HTML form element that contains the field inputs for the Address Confirmation for
@@ -222,6 +222,6 @@ const goToHowOftenStep = () => {
     triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.PHONE_NUMBER_STEP));
 };
 
-$('#btn-start-now').on('click', function() {
+$('#btn-start-now', earlyAccessStep).on('click', function() {
     goToServiceTypeStep();
 });
