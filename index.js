@@ -90,11 +90,11 @@ const locationsStep = $('#locations-step', registrationFormContainer);
 /**
  * Form nav buttons
  */
- $('#btn-locations-back', registrationFormContainer).on('click', function() {
+ $('#btn-location-back', registrationFormContainer).on('click', function() {
     goToServiceTypeStep();
 });
 
-$('#btn-locations-next', registrationFormContainer).on('click', function() {
+$('#btn-location-next', registrationFormContainer).on('click', function() {
     goToZipCodeStep();
 });
 
