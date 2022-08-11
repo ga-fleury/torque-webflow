@@ -85,7 +85,7 @@ $('#btn-service-type-next', registrationFormContainer).on('click', function() {
 /**
  * A reference to the DOM container of the elements on the "error" step.
  */
-const locationsStep = $('#locations-step');
+const locationsStep = $('#locations-step', registrationFormContainer);
 
 /**
  * Form nav buttons
@@ -103,7 +103,7 @@ $('#btn-locations-next', registrationFormContainer).on('click', function() {
 /**
  * A reference to the DOM container of the elements on the "error" step.
  */
-const zipCodeStep = $('#zip-code-step');
+const zipCodeStep = $('#zip-code-step', registrationFormContainer);
 
 /**
  * Form nav buttons
@@ -121,7 +121,7 @@ $('#btn-zip-code-next', registrationFormContainer).on('click', function() {
 /**
  * A reference to the DOM container of the elements on the "error" step.
  */
-const fleetMakeupStep = $('#fleet-makeup-step');
+const fleetMakeupStep = $('#fleet-makeup-step', registrationFormContainer);
 
 /**
  * Form nav buttons
@@ -139,7 +139,7 @@ $('#btn-fleet-makeup-next', registrationFormContainer).on('click', function() {
 /**
  * A reference to the DOM container of the elements on the "error" step.
  */
-const fleetSizeStep = $('#fleet-size-step');
+const fleetSizeStep = $('#fleet-size-step', registrationFormContainer);
 
 /**
  * Form nav buttons
@@ -157,7 +157,7 @@ $('#btn-fleet-size-next', registrationFormContainer).on('click', function() {
 /**
  * A reference to the DOM container of the elements on the "error" step.
  */
-const howOftenStep = $('#how-often-step');
+const howOftenStep = $('#how-often-step', registrationFormContainer);
 
 /**
  * Form nav buttons
@@ -175,7 +175,7 @@ $('#btn-how-often-next', registrationFormContainer).on('click', function() {
 /**
  * A reference to the DOM container of the elements on the "error" step.
  */
-const businessTypeStep = $('#business-type-step');
+const businessTypeStep = $('#business-type-step', registrationFormContainer);
 
 /**
  * Form nav buttons
@@ -193,7 +193,7 @@ $('#btn-business-type-next', registrationFormContainer).on('click', function() {
 /**
  * A reference to the DOM container of the elements on the "error" step.
  */
-const roleStep = $('#role-step');
+const roleStep = $('#role-step', registrationFormContainer);
 
 /**
  * Form nav buttons
@@ -211,7 +211,7 @@ $('#btn-role-next', registrationFormContainer).on('click', function() {
 /**
  * A reference to the DOM container of the elements on the "error" step.
  */
-const companyInformationStep = $('#company-information-step');
+const companyInformationStep = $('#company-information-step', registrationFormContainer);
 
 /**
  * Form nav buttons
@@ -229,7 +229,7 @@ $('#btn-company-information-next', registrationFormContainer).on('click', functi
 /**
  * A reference to the DOM container of the elements on the "error" step.
  */
-const phoneNumberStep = $('#phone-number-step');
+const phoneNumberStep = $('#phone-number-step', registrationFormContainer);
 
 /**
  * Form nav buttons
