@@ -224,6 +224,7 @@ const goToHowOftenStep = () => {
 };
 
 $('#btn-start-now', registrationFormContainer).on('click', function() {
-    goToServiceTypeStep();
+    // goToServiceTypeStep();
+    $('#reg-form-next').trigger('click');
     console.log("btn clicked")
 });
