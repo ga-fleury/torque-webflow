@@ -155,9 +155,14 @@ const getWebflowSliderNavigationControl = (index) => {
 /**
  * Goes to the Registration Form "error" step.
  */
+ const goToEarlyAccessStep = () => {
+    triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.EARLY_ACCESS_STEP));
+};
+/**
+ * Goes to the Registration Form "error" step.
+ */
  const goToServiceTypeStep = () => {
     triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.SERVICE_TYPE_STEP));
-    console.log("service type")
 };
 
 /**
@@ -224,5 +229,9 @@ const goToHowOftenStep = () => {
 };
 
 $('#btn-start-now', registrationFormContainer).on('click', function() {
+    goToServiceTypeStep();
+});
+
+$('#btn-go-back', registrationFormContainer).on('click', function() {
     goToServiceTypeStep();
 });
