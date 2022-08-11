@@ -225,5 +225,6 @@ const goToHowOftenStep = () => {
 
 $('#btn-start-now').on('click', function() {
     goToServiceTypeStep();
+    $('#reg-form-next').trigger('click');
     console.log("btn clicked")
 });
