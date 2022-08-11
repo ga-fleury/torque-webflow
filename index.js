@@ -34,13 +34,13 @@
 /**
  * A reference to the DOM container of the elements on the first step.
  */
-const companyProfileStep = $('#profile-step', registrationFormContainer);
+const earlyAccessStep = $('#early-access-step', registrationFormContainer);
 
 /**
  * Reference to the HTML form element that contains the field inputs for the first
  * step on the Registration form (Company Profile).
  */
-const registrationForm = $('#registration-data-form', companyProfileStep);
+const registrationForm = $('#registration-data-form', earlyAccessStep);
 
 /**
  * Gets a reference to the "I don't have a DOT" checkbox field.
