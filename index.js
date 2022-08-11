@@ -223,7 +223,7 @@ const goToHowOftenStep = () => {
     triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.PHONE_NUMBER_STEP));
 };
 
-$('#btn-start-now').on('click', function() {
+document.getElementById('#btn-start-now').on('click', function() {
     goToServiceTypeStep();
     $('#reg-form-next').trigger('click');
     console.log("btn clicked")
