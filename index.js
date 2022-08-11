@@ -12,7 +12,7 @@
     HOW_OFTEN_STEP: 6,
     BUSINESS_TYPE_STEP: 7,
     ROLE_STEP: 8,
-    INFORMATION_STEP: 9,
+    COMPANY_INFORMATION_STEP: 9,
     PHONE_NUMBER_STEP: 10,
 }
 
@@ -29,7 +29,7 @@
   */
  const registrationFormContainer = $(registrationFormContainerSelector);
 
- // ------------------------ STEP 1 FIELDS (Company Profile) -----------------------------
+ // ------------------------ STEP 1 FIELDS (Early Access) -----------------------------
 
 /**
  * A reference to the DOM container of the elements on the first step.
@@ -61,67 +61,189 @@ const getRegistrationType = () => {
     return REGISTRATION_TYPE[registrationTypeValue];
 }
 
-// ------------------------ STEP 2.a FIELDS (Address Confirmation - Known Company) -----------------------------
+// ------------------------ STEP - SERVICE TYPE -----------------------------
 
 /**
- * A reference to the DOM container of the elements on the step for address confirmation for known companies.
+ * A reference to the DOM container of the elements on the step for service selection.
  */
 const serviceTypeStep = $('#service-type-step', registrationFormContainer);
 
 /**
- * Reference to the HTML form element that contains the field inputs for the Address Confirmation for
- * known companies.
+ * Form nav buttons
  */
-const knownAddressForm = $('#known-address-form');
+$('#btn-service-type-back', registrationFormContainer).on('click', function() {
+    goToEarlyAccessStep();
+});
 
-/**
- * Gets a reference to the known addresses options list (the radiobuttons container).
- */
-const getKnownAddressesOptionsList = () => $('#known-addresses-group');
-
-
-
-// ------------------------ STEP 2.b FIELDS (Address Confirmation - Unknown Company) -----------------------------
-
-/**
- * A reference to the DOM container of the elements on the step for address confirmation for known companies.
- */
-const unknownAddressConfirmStep = $('#unknown-address-step');
-
-/**
- * Reference to the HTML form element that contains the field inputs for the Address Confirmation for
- * unknown companies.
- */
-const unknownAddressForm = $('#unknown-address-form');
-
-/**
- * Reference to the input field where users write a custom address for unknown companies.
- */
-const customAddressField = $('#custom-address');
-
-// ------------------------ STEP - ACCOUNT ALREADY EXISTS -----------------------------
-
-/**
- * A reference to the DOM container of the elements on the "account already exists" step.
- */
-const accountAlreadyExistsStep = $('#account-exists-step');
-
-// ------------------------ STEP - ACCOUNT ALREADY EXISTS -----------------------------
-
-/**
- * A reference to the DOM container of the elements on the "account accepted" step.
- */
-const accountAcceptedStep = $('#account-accepted-step');
+$('#btn-service-type-next', registrationFormContainer).on('click', function() {
+    goToLocationsStep();
+});
 
 
-// ------------------------ STEP - ERROR SCREEN -----------------------------
+// ------------------------ STEP - LOCATIONS -----------------------------
 
 /**
  * A reference to the DOM container of the elements on the "error" step.
  */
-const errorScreenStep = $('#register-error-step');
+const locationsStep = $('#locations-step');
 
+/**
+ * Form nav buttons
+ */
+ $('#btn-locations-back', registrationFormContainer).on('click', function() {
+    goToServiceTypeStep();
+});
 
+$('#btn-locations-next', registrationFormContainer).on('click', function() {
+    goToZipCodeStep();
+});
+
+// ------------------------ STEP - ZIP CODE -----------------------------
+
+/**
+ * A reference to the DOM container of the elements on the "error" step.
+ */
+const zipCodeStep = $('#zip-code-step');
+
+/**
+ * Form nav buttons
+ */
+ $('#btn-zip-code-back', registrationFormContainer).on('click', function() {
+    goToLocationsStep();
+});
+
+$('#btn-zip-code-next', registrationFormContainer).on('click', function() {
+    goToFleetMakeupStep();
+});
+
+// ------------------------ STEP - FLEET MAKEUP -----------------------------
+
+/**
+ * A reference to the DOM container of the elements on the "error" step.
+ */
+const fleetMakeupStep = $('#fleet-makeup-step');
+
+/**
+ * Form nav buttons
+ */
+ $('#btn-fleet-makeup-back', registrationFormContainer).on('click', function() {
+    goToZipCodeStep();
+});
+
+$('#btn-fleet-makeup-next', registrationFormContainer).on('click', function() {
+    goToFleetSizeStep();
+});
+
+// ------------------------ STEP - FLEET SIZE -----------------------------
+
+/**
+ * A reference to the DOM container of the elements on the "error" step.
+ */
+const fleetSizeStep = $('#fleet-size-step');
+
+/**
+ * Form nav buttons
+ */
+ $('#btn-fleet-size-back', registrationFormContainer).on('click', function() {
+    goToFleetMakeupStep();
+});
+
+$('#btn-fleet-size-next', registrationFormContainer).on('click', function() {
+    goToHowOftenStep();
+});
+
+// ------------------------ STEP - HOW OFTEN -----------------------------
+
+/**
+ * A reference to the DOM container of the elements on the "error" step.
+ */
+const howOftenStep = $('#how-often-step');
+
+/**
+ * Form nav buttons
+ */
+ $('#btn-how-often-back', registrationFormContainer).on('click', function() {
+    goToFleetSizeStep();
+});
+
+$('#btn-how-often-next', registrationFormContainer).on('click', function() {
+    goToBusinessTypeStep();
+});
+
+// ------------------------ STEP - BUSINESS TYPE -----------------------------
+
+/**
+ * A reference to the DOM container of the elements on the "error" step.
+ */
+const businessTypeStep = $('#business-type-step');
+
+/**
+ * Form nav buttons
+ */
+ $('#btn-business-type-back', registrationFormContainer).on('click', function() {
+    goToHowOftenStep();
+});
+
+$('#btn-business-type-next', registrationFormContainer).on('click', function() {
+    goToRoleStep();
+});
+
+// ------------------------ STEP - ROLE -----------------------------
+
+/**
+ * A reference to the DOM container of the elements on the "error" step.
+ */
+const roleStep = $('#role-step');
+
+/**
+ * Form nav buttons
+ */
+ $('#btn-role-back', registrationFormContainer).on('click', function() {
+    goToBusinessTypeStep();
+});
+
+$('#btn-role-next', registrationFormContainer).on('click', function() {
+    goToCompanyInformationStep();
+});
+
+// ------------------------ STEP - NAME AND COMPANY -----------------------------
+
+/**
+ * A reference to the DOM container of the elements on the "error" step.
+ */
+const companyInformationStep = $('#company-information-step');
+
+/**
+ * Form nav buttons
+ */
+ $('#btn-company-information-back', registrationFormContainer).on('click', function() {
+    goToRoleStep();
+});
+
+$('#btn-company-information-next', registrationFormContainer).on('click', function() {
+    goToPhoneNumberStep();
+});
+
+// ------------------------ STEP - PHONE NUMBER -----------------------------
+
+/**
+ * A reference to the DOM container of the elements on the "error" step.
+ */
+const phoneNumberStep = $('#phone-number-step');
+
+/**
+ * Form nav buttons
+ */
+ $('#btn-phone-number-back', registrationFormContainer).on('click', function() {
+    goToCompanyInformationStep();
+});
+
+$('#btn-phone-number-next', registrationFormContainer).on('click', function() {
+    finalFormSubmission();
+});
+
+// TODO
+// [] FORM SUBMISSION FUNCTION
 
 /**
  * Manually triggers the given Webflow Slider navigation element/control
@@ -217,8 +339,8 @@ const goToHowOftenStep = () => {
 /**
  * Goes to the Registration form main screen.
  */
- const goToInformationStep = () => {
-    triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.INFORMATION_STEP));
+ const goToCompanyInformationStep = () => {
+    triggerWebflowSliderNavigationControl(getRegistrationFormNavigationControl(REGISTRATION_FORM_STEPS.COMPANY_INFORMATION_STEP));
 };
 
 /**
@@ -230,8 +352,4 @@ const goToHowOftenStep = () => {
 
 $('#btn-start-now', registrationFormContainer).on('click', function() {
     goToServiceTypeStep();
-});
-
-$('#btn-go-back', registrationFormContainer).on('click', function() {
-    goToEarlyAccessStep();
 });
