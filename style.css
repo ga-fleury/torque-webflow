@@ -1,0 +1,7 @@
+.disabled {
+    border-radius: 2px;
+    background-color: rgb(221, 221, 221);
+    color: rgb(170, 170, 170);
+    cursor: default;
+    box-shadow: none;
+}
