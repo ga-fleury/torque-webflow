@@ -110,6 +110,17 @@ const locationsStep = $("#locations-step", registrationFormContainer);
 locationsStep.find("#btn-location-next").prop("disabled", true);
 locationsStep.find("#btn-location-next").addClass("disabled");
 
+$("#radio-1,#radio-2").on("click", function () {
+    if ($(this).find(".w-checkbox-input").checked) {
+        $("#btn-location-next").addClass("disabled");
+        $("#btn-location-next").prop("disabled", true);
+        $("#btn-location-next").attr("onclick", "return false;");
+    } else {
+        $("#btn-location-next").removeClass("disabled");
+        $("#btn-location-next").attr("onclick", "goToZipCodeStep();");
+    }
+});
+
 /**
  * Form nav buttons
  */
@@ -138,10 +149,12 @@ const zipCodeStep = $("#zip-code-step", registrationFormContainer);
  */
 $("#btn-zip-code-back", registrationFormContainer).on("click", function () {
     goToLocationsStep();
+    return false;
 });
 
 $("#btn-zip-code-next", registrationFormContainer).on("click", function () {
     goToFleetMakeupStep();
+    return false;
 });
 
 // ------------------------ STEP - FLEET MAKEUP -----------------------------
@@ -150,16 +163,31 @@ $("#btn-zip-code-next", registrationFormContainer).on("click", function () {
  * A reference to the DOM container of the elements on the "error" step.
  */
 const fleetMakeupStep = $("#fleet-makeup-step", registrationFormContainer);
+fleetMakeupStep.find("#btn-fleet-makeup-next").prop("disabled", true);
+fleetMakeupStep.find("#btn-fleet-makeup-next").addClass("disabled");
+
+$("#checkbox21,#checkbox22,#checkbox23,#checkbox24").on("click", function () {
+    if ($(this).find(".w-checkbox-input").hasClass("w--redirected-checked")) {
+        $("#btn-fleet-makeup-next").addClass("disabled");
+        $("#btn-fleet-makeup-next").prop("disabled", true);
+        $("#btn-fleet-makeup-next").attr("onclick", "return false;");
+    } else {
+        $("#btn-fleet-makeup-next").removeClass("disabled");
+        $("#btn-fleet-makeup-next").attr("onclick", "goToFleetSizeStep();");
+    }
+});
 
 /**
  * Form nav buttons
  */
 $("#btn-fleet-makeup-back", registrationFormContainer).on("click", function () {
     goToZipCodeStep();
+    return false;
 });
 
 $("#btn-fleet-makeup-next", registrationFormContainer).on("click", function () {
     goToFleetSizeStep();
+    return false;
 });
 
 // ------------------------ STEP - FLEET SIZE -----------------------------
@@ -168,16 +196,31 @@ $("#btn-fleet-makeup-next", registrationFormContainer).on("click", function () {
  * A reference to the DOM container of the elements on the "error" step.
  */
 const fleetSizeStep = $("#fleet-size-step", registrationFormContainer);
+fleetSizeStep.find("#btn-fleet-size-next").prop("disabled", true);
+fleetSizeStep.find("#btn-fleet-size-next").addClass("disabled");
+
+$("#radio-3,#radio-4,#radio-5,#radio-6").on("click", function () {
+    if ($(this).find(".w-checkbox-input").hasClass("w--redirected-checked")) {
+        $("#btn-fleet-size-next").addClass("disabled");
+        $("#btn-fleet-size-next").prop("disabled", true);
+        $("#btn-fleet-size-next").attr("onclick", "return false;");
+    } else {
+        $("#btn-fleet-size-next").removeClass("disabled");
+        $("#btn-fleet-size-next").attr("onclick", "goToHowOftenStep();");
+    }
+});
 
 /**
  * Form nav buttons
  */
 $("#btn-fleet-size-back", registrationFormContainer).on("click", function () {
     goToFleetMakeupStep();
+    return false;
 });
 
 $("#btn-fleet-size-next", registrationFormContainer).on("click", function () {
     goToHowOftenStep();
+    return false;
 });
 
 // ------------------------ STEP - HOW OFTEN -----------------------------
@@ -186,16 +229,31 @@ $("#btn-fleet-size-next", registrationFormContainer).on("click", function () {
  * A reference to the DOM container of the elements on the "error" step.
  */
 const howOftenStep = $("#how-often-step", registrationFormContainer);
+howOftenStep.find("#btn-how-often-next").prop("disabled", true);
+howOftenStep.find("#btn-how-often-next").addClass("disabled");
+
+$("#radio-7,#radio-8,#radio-9").on("click", function () {
+    if ($(this).find(".w-checkbox-input").hasClass("w--redirected-checked")) {
+        $("#btn-how-often-next").addClass("disabled");
+        $("#btn-how-often-next").prop("disabled", true);
+        $("#btn-how-often-next").attr("onclick", "return false;");
+    } else {
+        $("#btn-how-often-next").removeClass("disabled");
+        $("#btn-how-often-next").attr("onclick", "goToBusinessTypeStep();");
+    }
+});
 
 /**
  * Form nav buttons
  */
 $("#btn-how-often-back", registrationFormContainer).on("click", function () {
     goToFleetSizeStep();
+    return false;
 });
 
 $("#btn-how-often-next", registrationFormContainer).on("click", function () {
     goToBusinessTypeStep();
+    return false;
 });
 
 // ------------------------ STEP - BUSINESS TYPE -----------------------------
@@ -204,6 +262,19 @@ $("#btn-how-often-next", registrationFormContainer).on("click", function () {
  * A reference to the DOM container of the elements on the "error" step.
  */
 const businessTypeStep = $("#business-type-step", registrationFormContainer);
+businessTypeStep.find("#btn-business-type-next").prop("disabled", true);
+businessTypeStep.find("#btn-business-type-next").addClass("disabled");
+
+$("#radio-10,#radio-11,#radio-12,#radio-13").on("click", function () {
+    if ($(this).find(".w-checkbox-input").hasClass("w--redirected-checked")) {
+        $("#btn-business-type-next").addClass("disabled");
+        $("#btn-business-type-next").prop("disabled", true);
+        $("#btn-business-type-next").attr("onclick", "return false;");
+    } else {
+        $("#btn-business-type-next").removeClass("disabled");
+        $("#btn-business-type-next").attr("onclick", "goToRoleStep();");
+    }
+});
 
 /**
  * Form nav buttons
@@ -212,6 +283,7 @@ $("#btn-business-type-back", registrationFormContainer).on(
     "click",
     function () {
         goToHowOftenStep();
+        return false;
     }
 );
 
@@ -219,6 +291,7 @@ $("#btn-business-type-next", registrationFormContainer).on(
     "click",
     function () {
         goToRoleStep();
+        return false;
     }
 );
 
@@ -228,6 +301,19 @@ $("#btn-business-type-next", registrationFormContainer).on(
  * A reference to the DOM container of the elements on the "error" step.
  */
 const roleStep = $("#role-step", registrationFormContainer);
+roleStep.find("#btn-role-next").prop("disabled", true);
+roleStep.find("#btn-role-next").addClass("disabled");
+
+$("#radio-14,#radio-15,#radio-16,#radio-17,#radio-18").on("click", function () {
+    if ($(this).find(".w-checkbox-input").hasClass("w--redirected-checked")) {
+        $("#btn-role-next").addClass("disabled");
+        $("#btn-role-next").prop("disabled", true);
+        $("#btn-role-next").attr("onclick", "return false;");
+    } else {
+        $("#btn-role-next").removeClass("disabled");
+        $("#btn-role-next").attr("onclick", "goToCompanyInformationStep();");
+    }
+});
 
 /**
  * Form nav buttons
@@ -238,6 +324,7 @@ $("#btn-role-back", registrationFormContainer).on("click", function () {
 
 $("#btn-role-next", registrationFormContainer).on("click", function () {
     goToCompanyInformationStep();
+    return false;
 });
 
 // ------------------------ STEP - NAME AND COMPANY -----------------------------
@@ -264,6 +351,7 @@ $("#btn-company-information-next", registrationFormContainer).on(
     "click",
     function () {
         goToPhoneNumberStep();
+        return false;
     }
 );
 
@@ -460,3 +548,21 @@ $(".w-checkbox").each(function (index) {
         }
     });
 });
+
+// $(".w-radio").each(function (index) {
+//     $(this).on("click", function () {
+//         if (
+//             $(this).checked
+//         ) {
+//             $(this).css("background-color", "white");
+//             $(this).css("border", "none");
+//             $(this).find(".checkbox-label").css("color", "#6b7280");
+//             $(this).find(".svg-icon-form").css("color", "#6b7280");
+//         } else {
+//             $(this).css("background-color", "#ffe1d2");
+//             $(this).css("border", "2px solid rgb(255, 106, 19");
+//             $(this).find(".checkbox-label").css("color", "rgb(255, 106, 19");
+//             $(this).find(".svg-icon-form").css("color", "rgb(255, 106, 19");
+//         }
+//     });
+// });
