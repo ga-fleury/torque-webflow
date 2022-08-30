@@ -1,3 +1,5 @@
+console.log("loaded");
+
 /**
  * A enum-like structure to make it easier to reference the indexes of the different
  * steps on the Registration Form slider/carousel.
@@ -74,7 +76,9 @@ const serviceTypeStep = $("#service-type-step", registrationFormContainer);
 serviceTypeStep.find("#btn-service-type-next").prop("disabled", true);
 serviceTypeStep.find("#btn-service-type-next").addClass("disabled");
 
-$("#checkbox11,#checkbox12,#checkbox13").on("click", function () {
+const checkboxesServiceType = $("#checkbox11,#checkbox12,#checkbox13");
+
+checkboxesServiceType.on("click", function () {
     if ($(this).find(".w-checkbox-input").hasClass("w--redirected-checked")) {
         $("#btn-service-type-next").addClass("disabled");
         $("#btn-service-type-next").prop("disabled", true);
@@ -93,7 +97,7 @@ $("#btn-service-type-back", registrationFormContainer).on("click", function () {
 });
 
 $("#btn-service-type-next", registrationFormContainer).on("click", function () {
-    if($(this).has("disabled")){
+    if ($(this).has("disabled")) {
         return false;
     } else {
         goToLocationsStep();
@@ -129,7 +133,7 @@ $("#btn-location-back", registrationFormContainer).on("click", function () {
 });
 
 $("#btn-location-next", registrationFormContainer).on("click", function () {
-    if($(this).has("disabled")){
+    if ($(this).has("disabled")) {
         return false;
     } else {
         goToZipCodeStep();
@@ -140,9 +144,28 @@ $("#btn-location-next", registrationFormContainer).on("click", function () {
 // ------------------------ STEP - ZIP CODE -----------------------------
 
 /**
- * A reference to the DOM container of the elements on the "error" step.
+ * A reference to the DOM container of the elements on the "Zip Code" step.
  */
 const zipCodeStep = $("#zip-code-step", registrationFormContainer);
+zipCodeStep.find("#btn-zip-code-next").prop("disabled", true);
+zipCodeStep.find("#btn-zip-code-next").addClass("disabled");
+
+$("#zip-code-field").keyup(function () {
+    validateZipCode();
+});
+
+function validateZipCode() {
+    const isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+    const inputValue = $("#zip-code-field").val();
+    if (inputValue.match(isValidZip)) {
+        $("#btn-zip-code-next").removeClass("disabled");
+        $("#btn-zip-code-next").attr("onclick", "goToFleetMakeupStep();");
+    } else {
+        $("#btn-zip-code-next").addClass("disabled");
+        $("#btn-zip-code-next").prop("disabled", true);
+        $("#btn-zip-code-next").attr("onclick", "return false;");
+    }
+}
 
 /**
  * Form nav buttons
@@ -153,8 +176,12 @@ $("#btn-zip-code-back", registrationFormContainer).on("click", function () {
 });
 
 $("#btn-zip-code-next", registrationFormContainer).on("click", function () {
-    goToFleetMakeupStep();
-    return false;
+    if ($(this).has("disabled")) {
+        return false;
+    } else {
+        goToFleetMakeupStep();
+        return false;
+    }
 });
 
 // ------------------------ STEP - FLEET MAKEUP -----------------------------
@@ -186,8 +213,12 @@ $("#btn-fleet-makeup-back", registrationFormContainer).on("click", function () {
 });
 
 $("#btn-fleet-makeup-next", registrationFormContainer).on("click", function () {
-    goToFleetSizeStep();
-    return false;
+    if ($(this).has("disabled")) {
+        return false;
+    } else {
+        goToFleetSizeStep();
+        return false;
+    }
 });
 
 // ------------------------ STEP - FLEET SIZE -----------------------------
@@ -219,8 +250,12 @@ $("#btn-fleet-size-back", registrationFormContainer).on("click", function () {
 });
 
 $("#btn-fleet-size-next", registrationFormContainer).on("click", function () {
-    goToHowOftenStep();
-    return false;
+    if ($(this).has("disabled")) {
+        return false;
+    } else {
+        goToHowOftenStep();
+        return false;
+    }
 });
 
 // ------------------------ STEP - HOW OFTEN -----------------------------
@@ -252,8 +287,12 @@ $("#btn-how-often-back", registrationFormContainer).on("click", function () {
 });
 
 $("#btn-how-often-next", registrationFormContainer).on("click", function () {
-    goToBusinessTypeStep();
-    return false;
+    if ($(this).has("disabled")) {
+        return false;
+    } else {
+        goToBusinessTypeStep();
+        return false;
+    }
 });
 
 // ------------------------ STEP - BUSINESS TYPE -----------------------------
@@ -290,8 +329,12 @@ $("#btn-business-type-back", registrationFormContainer).on(
 $("#btn-business-type-next", registrationFormContainer).on(
     "click",
     function () {
-        goToRoleStep();
-        return false;
+        if ($(this).has("disabled")) {
+            return false;
+        } else {
+            goToRoleStep();
+            return false;
+        }
     }
 );
 
@@ -323,8 +366,12 @@ $("#btn-role-back", registrationFormContainer).on("click", function () {
 });
 
 $("#btn-role-next", registrationFormContainer).on("click", function () {
-    goToCompanyInformationStep();
-    return false;
+    if ($(this).has("disabled")) {
+        return false;
+    } else {
+        goToCompanyInformationStep();
+        return false;
+    }
 });
 
 // ------------------------ STEP - NAME AND COMPANY -----------------------------
@@ -336,6 +383,48 @@ const companyInformationStep = $(
     "#company-information-step",
     registrationFormContainer
 );
+
+companyInformationStep
+    .find("#btn-company-information-next")
+    .prop("disabled", true);
+companyInformationStep
+    .find("#btn-company-information-next")
+    .addClass("disabled");
+
+$("#name-field").keyup(function () {
+    validateName();
+});
+
+$("#company-name-field").keyup(function () {
+    validateCompanyName();
+});
+
+$("#email-field").keyup(function () {
+    validateEmail();
+});
+
+function validateName() {
+    let inputValue = $("#name-field").val();
+    inputValue > 0 ? true : false;
+}
+
+function validateCompanyName() {
+    let inputValue = $("#company-name-field").val();
+    inputValue > 0 ? true : false;
+}
+
+function validateEmail() {
+    let isValidEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    let inputValue = $("#email-field").val();
+    if (inputValue.match(isValidEmail)) {
+        $("#btn-company-information-next").removeClass("disabled");
+        $("#btn-company-information-next").attr("onclick", "goToPhoneNumberStep();");
+    } else {
+        $("#btn-company-information-next").addClass("disabled");
+        $("#btn-company-information-next").prop("disabled", true);
+        $("#btn-company-information-next").attr("onclick", "return false;");
+    }
+}
 
 /**
  * Form nav buttons
@@ -350,8 +439,12 @@ $("#btn-company-information-back", registrationFormContainer).on(
 $("#btn-company-information-next", registrationFormContainer).on(
     "click",
     function () {
-        goToPhoneNumberStep();
-        return false;
+        if ($(this).has("disabled")) {
+            return false;
+        } else {
+            goToPhoneNumberStep();
+            return false;
+        }
     }
 );
 
@@ -361,6 +454,28 @@ $("#btn-company-information-next", registrationFormContainer).on(
  * A reference to the DOM container of the elements on the "error" step.
  */
 const phoneNumberStep = $("#phone-number-step", registrationFormContainer);
+phoneNumberStep.find("#btn-phone-number-next").prop("disabled", true);
+phoneNumberStep.find("#btn-phone-number-next").addClass("disabled");
+
+$("#phone-field").keyup(function () {
+    validatePhone();
+});
+
+function validatePhone() {
+    let isValidPhone = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+    let inputValue = $("#phone-field").val();
+    if (inputValue.match(isValidPhone)) {
+        $("#btn-phone-number-next").removeClass("disabled");
+        $("#btn-phone-number-next").attr("onclick", "finalFormSubmission();");
+    } else {
+        $("#btn-phone-number-next").addClass("disabled");
+        $("#btn-phone-number-next").prop("disabled", true);
+        $("#btn-phone-number-next").attr("onclick", "return false;");
+    }
+}
+
+
+
 
 /**
  * Form nav buttons
@@ -370,7 +485,12 @@ $("#btn-phone-number-back", registrationFormContainer).on("click", function () {
 });
 
 $("#btn-phone-number-next", registrationFormContainer).on("click", function () {
-    finalFormSubmission();
+    if ($(this).has("disabled")) {
+        return false;
+    } else {
+        finalFormSubmission();
+        return false;
+    }
 });
 
 // TODO
@@ -548,6 +668,10 @@ $(".w-checkbox").each(function (index) {
         }
     });
 });
+
+function finalFormSubmission() {
+    console.log("finalFormSubmission")
+}
 
 // $(".w-radio").each(function (index) {
 //     $(this).on("click", function () {

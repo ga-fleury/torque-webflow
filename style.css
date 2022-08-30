@@ -6,6 +6,19 @@
     box-shadow: none;
 }
 
+.checked {
+    background-color: #ffe1d2;
+    border: 2px solid rgb(255, 106, 19);
+}
+
+.color-checked {
+    color: rgb(255, 106, 19);
+}
+
 input[type="radio"] {
 	accent-color: #f47633;
+}
+
+#btn-start-now {
+    cursor: pointer;
 }
