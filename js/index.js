@@ -160,6 +160,21 @@ $("#radio-1,#radio-2").on("click", function () {
     })
 });
 
+$("#radio-1,#radio-2").parent().hover(radioIn, radioOut);
+
+function radioIn() {
+    if (!$(this).find('.w-radio-input').is(':checked')) {
+        $(this).find('.radio-inner').addClass('hover');
+    }
+    $(this).css('border', '2px solid #f47633')
+}
+
+function radioOut() {
+    if (!$(this).find('.w-radio-input').is(':checked')) {
+        $(this).css('border', '2px solid transparent')
+    }
+    $(this).find('.radio-inner').removeClass('hover');
+}
 /**
  * Form nav buttons
  */
@@ -299,6 +314,7 @@ const fleetSizeStep = $("#fleet-size-step", registrationFormContainer);
 fleetSizeStep.find("#btn-fleet-size-next").prop("disabled", true);
 fleetSizeStep.find("#btn-fleet-size-next").addClass("disabled");
 
+$("#radio-3,#radio-4,#radio-5,#radio-6").parent().hover(radioIn, radioOut);
 
 $("#radio-3,#radio-4,#radio-5,#radio-6").on("click", function () {
     if ($(this).find(".w-checkbox-input").is(':checked')) {
@@ -351,6 +367,9 @@ const howOftenStep = $("#how-often-step", registrationFormContainer);
 howOftenStep.find("#btn-how-often-next").prop("disabled", true);
 howOftenStep.find("#btn-how-often-next").addClass("disabled");
 
+$("#radio-7,#radio-8,#radio-9").parent().hover(radioIn, radioOut);
+
+
 $("#radio-7,#radio-8,#radio-9").on("click", function () {
     if ($(this).find(".w-checkbox-input").is(':checked')) {
         $("#btn-how-often-next").addClass("disabled");
@@ -401,6 +420,9 @@ $("#btn-how-often-next", registrationFormContainer).on("click", function () {
 const businessTypeStep = $("#business-type-step", registrationFormContainer);
 businessTypeStep.find("#btn-business-type-next").prop("disabled", true);
 businessTypeStep.find("#btn-business-type-next").addClass("disabled");
+
+$("#radio-10,#radio-11,#radio-12,#radio-13").parent().hover(radioIn, radioOut);
+
 
 $("#radio-10,#radio-11,#radio-12,#radio-13").on("click", function () {
     if ($(this).find(".w-checkbox-input").is(':checked')) {
@@ -458,6 +480,9 @@ $("#btn-business-type-next", registrationFormContainer).on(
 const roleStep = $("#role-step", registrationFormContainer);
 roleStep.find("#btn-role-next").prop("disabled", true);
 roleStep.find("#btn-role-next").addClass("disabled");
+
+$("#radio-14,#radio-15,#radio-16,#radio-17,#radio-18").parent().hover(radioIn, radioOut);
+
 
 $("#radio-14,#radio-15,#radio-16,#radio-17,#radio-18").on("click", function () {
     if ($(this).find(".w-checkbox-input").is(':checked')) {
