@@ -1,4 +1,18 @@
-console.log("loaded");
+/**
+ * Removes all sucesses and fails from the different form snippets
+ */
+$('.w-form-fail').each(function (i, obj) {
+    $(this).detach();
+});
+
+$('.w-form-done').each(function (i, obj) {
+    $(this).detach();
+});
+
+$('input[type=radio]').each(function () {
+    $(this).after("<div class='radio-outer'> <div class='radio-inner'> </div></div>")
+    $(this).css('display', 'none')
+});
 
 /**
  * A enum-like structure to make it easier to reference the indexes of the different
@@ -77,15 +91,22 @@ serviceTypeStep.find("#btn-service-type-next").prop("disabled", true);
 serviceTypeStep.find("#btn-service-type-next").addClass("disabled");
 
 const checkboxesServiceType = $("#checkbox11,#checkbox12,#checkbox13");
+const checksServiceType = $("#check11,#check12,#check13");
 
 checkboxesServiceType.on("click", function () {
-    if ($(this).find(".w-checkbox-input").hasClass("w--redirected-checked")) {
+    let checks = 0;
+    $(checksServiceType).each(function (i, obj) {
+        if (this.checked) {
+            checks++;
+        }
+    });
+    if (checks > 0) {
+        $("#btn-service-type-next").removeClass("disabled");
+        $("#btn-service-type-next").attr("onclick", "goToLocationsStep();");
+    } else if (checks == 0) {
         $("#btn-service-type-next").addClass("disabled");
         $("#btn-service-type-next").prop("disabled", true);
         $("#btn-service-type-next").attr("onclick", "return false;");
-    } else {
-        $("#btn-service-type-next").removeClass("disabled");
-        $("#btn-service-type-next").attr("onclick", "goToLocationsStep();");
     }
 });
 
@@ -115,14 +136,28 @@ locationsStep.find("#btn-location-next").prop("disabled", true);
 locationsStep.find("#btn-location-next").addClass("disabled");
 
 $("#radio-1,#radio-2").on("click", function () {
-    if ($(this).find(".w-checkbox-input").checked) {
+    if ($(this).find(".w-checkbox-input").is(':checked')) {
         $("#btn-location-next").addClass("disabled");
         $("#btn-location-next").prop("disabled", true);
         $("#btn-location-next").attr("onclick", "return false;");
+        $(this).next('.radio-outer').removeClass('active');
     } else {
         $("#btn-location-next").removeClass("disabled");
         $("#btn-location-next").attr("onclick", "goToZipCodeStep();");
+        $(this).parent().css('background-color', 'rgb(255 225 210)')
+        $(this).parent().css('border', '2px solid #f47633')
+        $(this).parent().find('.radio-button-label').css('color', '#f47633')
+        $(this).next('.radio-outer').addClass('active');
     }
+
+    $("#radio-1,#radio-2").each(function () {
+        if (!$(this).is(':checked')) {
+            $(this).next('.radio-outer').removeClass('active');
+            $(this).parent().css('background-color', 'white')
+            $(this).parent().css('border', '2px solid transparent')
+            $(this).parent().find('.radio-button-label').css('color', 'rgb(107 114 128)')
+        }
+    })
 });
 
 /**
@@ -149,21 +184,46 @@ $("#btn-location-next", registrationFormContainer).on("click", function () {
 const zipCodeStep = $("#zip-code-step", registrationFormContainer);
 zipCodeStep.find("#btn-zip-code-next").prop("disabled", true);
 zipCodeStep.find("#btn-zip-code-next").addClass("disabled");
+let zipErrorMessageDisplayed = false;
 
 $("#zip-code-field").keyup(function () {
     validateZipCode();
 });
 
+$('#zip-code-field').submit(function () {
+    return false;
+});
+
 function validateZipCode() {
+
     const isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
     const inputValue = $("#zip-code-field").val();
+
     if (inputValue.match(isValidZip)) {
-        $("#btn-zip-code-next").removeClass("disabled");
-        $("#btn-zip-code-next").attr("onclick", "goToFleetMakeupStep();");
+        zipCodeValidStyling();
     } else {
-        $("#btn-zip-code-next").addClass("disabled");
-        $("#btn-zip-code-next").prop("disabled", true);
-        $("#btn-zip-code-next").attr("onclick", "return false;");
+        zipCodeInvalidStyling();
+    }
+}
+
+function zipCodeValidStyling() {
+    $("#btn-zip-code-next").removeClass("disabled");
+    $("#btn-zip-code-next").attr("onclick", "goToFleetMakeupStep();");
+    $("#zip-code-field").css('border', '2px solid rgb(0 51 160)')
+    if (zipErrorMessageDisplayed == true) {
+        $("#error-zip").detach();
+        zipErrorMessageDisplayed = false
+    }
+}
+
+function zipCodeInvalidStyling() {
+    $("#btn-zip-code-next").addClass("disabled");
+    $("#btn-zip-code-next").prop("disabled", true);
+    $("#btn-zip-code-next").attr("onclick", "return false;");
+    $("#zip-code-field").css('border', '2px solid red')
+    if (zipErrorMessageDisplayed == false) {
+        $("#zip-code-wrap").append("<p id='error-zip' style='color:red;'>Please enter a valid value.</p>");
+        zipErrorMessageDisplayed = true
     }
 }
 
@@ -193,14 +253,23 @@ const fleetMakeupStep = $("#fleet-makeup-step", registrationFormContainer);
 fleetMakeupStep.find("#btn-fleet-makeup-next").prop("disabled", true);
 fleetMakeupStep.find("#btn-fleet-makeup-next").addClass("disabled");
 
-$("#checkbox21,#checkbox22,#checkbox23,#checkbox24").on("click", function () {
-    if ($(this).find(".w-checkbox-input").hasClass("w--redirected-checked")) {
+const checkboxesFleetMakeup = $("#checkbox21,#checkbox22,#checkbox23,#checkbox24");
+const checksFleetMakeup = $("#check21,#check22,#check23,#check24");
+
+checkboxesFleetMakeup.on("click", function () {
+    let checks = 0;
+    $(checksFleetMakeup).each(function (i, obj) {
+        if (this.checked) {
+            checks++;
+        }
+    });
+    if (checks > 0) {
+        $("#btn-fleet-makeup-next").removeClass("disabled");
+        $("#btn-fleet-makeup-next").attr("onclick", "goToFleetSizeStep();");
+    } else if (checks == 0) {
         $("#btn-fleet-makeup-next").addClass("disabled");
         $("#btn-fleet-makeup-next").prop("disabled", true);
         $("#btn-fleet-makeup-next").attr("onclick", "return false;");
-    } else {
-        $("#btn-fleet-makeup-next").removeClass("disabled");
-        $("#btn-fleet-makeup-next").attr("onclick", "goToFleetSizeStep();");
     }
 });
 
@@ -230,15 +299,30 @@ const fleetSizeStep = $("#fleet-size-step", registrationFormContainer);
 fleetSizeStep.find("#btn-fleet-size-next").prop("disabled", true);
 fleetSizeStep.find("#btn-fleet-size-next").addClass("disabled");
 
+
 $("#radio-3,#radio-4,#radio-5,#radio-6").on("click", function () {
-    if ($(this).find(".w-checkbox-input").hasClass("w--redirected-checked")) {
+    if ($(this).find(".w-checkbox-input").is(':checked')) {
         $("#btn-fleet-size-next").addClass("disabled");
         $("#btn-fleet-size-next").prop("disabled", true);
         $("#btn-fleet-size-next").attr("onclick", "return false;");
+        $(this).next('.radio-outer').removeClass('active');
     } else {
         $("#btn-fleet-size-next").removeClass("disabled");
         $("#btn-fleet-size-next").attr("onclick", "goToHowOftenStep();");
+        $(this).parent().css('background-color', 'rgb(255 225 210)')
+        $(this).parent().css('border', '2px solid #f47633')
+        $(this).parent().find('.radio-button-label').css('color', '#f47633')
+        $(this).next('.radio-outer').addClass('active');
     }
+
+    $("#radio-3,#radio-4,#radio-5,#radio-6").each(function () {
+        if (!$(this).is(':checked')) {
+            $(this).next('.radio-outer').removeClass('active');
+            $(this).parent().css('background-color', 'white')
+            $(this).parent().css('border', '2px solid transparent')
+            $(this).parent().find('.radio-button-label').css('color', 'rgb(107 114 128)')
+        }
+    })
 });
 
 /**
@@ -268,14 +352,28 @@ howOftenStep.find("#btn-how-often-next").prop("disabled", true);
 howOftenStep.find("#btn-how-often-next").addClass("disabled");
 
 $("#radio-7,#radio-8,#radio-9").on("click", function () {
-    if ($(this).find(".w-checkbox-input").hasClass("w--redirected-checked")) {
+    if ($(this).find(".w-checkbox-input").is(':checked')) {
         $("#btn-how-often-next").addClass("disabled");
         $("#btn-how-often-next").prop("disabled", true);
         $("#btn-how-often-next").attr("onclick", "return false;");
+        $(this).next('.radio-outer').removeClass('active');
     } else {
         $("#btn-how-often-next").removeClass("disabled");
         $("#btn-how-often-next").attr("onclick", "goToBusinessTypeStep();");
+        $(this).parent().css('background-color', 'rgb(255 225 210)')
+        $(this).parent().css('border', '2px solid #f47633')
+        $(this).parent().find('.radio-button-label').css('color', '#f47633')
+        $(this).next('.radio-outer').addClass('active');
     }
+
+    $("#radio-7,#radio-8,#radio-9").each(function () {
+        if (!$(this).is(':checked')) {
+            $(this).next('.radio-outer').removeClass('active');
+            $(this).parent().css('background-color', 'white')
+            $(this).parent().css('border', '2px solid transparent')
+            $(this).parent().find('.radio-button-label').css('color', 'rgb(107 114 128)')
+        }
+    })
 });
 
 /**
@@ -305,14 +403,28 @@ businessTypeStep.find("#btn-business-type-next").prop("disabled", true);
 businessTypeStep.find("#btn-business-type-next").addClass("disabled");
 
 $("#radio-10,#radio-11,#radio-12,#radio-13").on("click", function () {
-    if ($(this).find(".w-checkbox-input").hasClass("w--redirected-checked")) {
+    if ($(this).find(".w-checkbox-input").is(':checked')) {
         $("#btn-business-type-next").addClass("disabled");
         $("#btn-business-type-next").prop("disabled", true);
         $("#btn-business-type-next").attr("onclick", "return false;");
+        $(this).next('.radio-outer').removeClass('active');
     } else {
         $("#btn-business-type-next").removeClass("disabled");
         $("#btn-business-type-next").attr("onclick", "goToRoleStep();");
+        $(this).parent().css('background-color', 'rgb(255 225 210)')
+        $(this).parent().css('border', '2px solid #f47633')
+        $(this).parent().find('.radio-button-label').css('color', '#f47633')
+        $(this).next('.radio-outer').addClass('active');
     }
+
+    $("#radio-10,#radio-11,#radio-12,#radio-13").each(function () {
+        if (!$(this).is(':checked')) {
+            $(this).next('.radio-outer').removeClass('active');
+            $(this).parent().css('background-color', 'white')
+            $(this).parent().css('border', '2px solid transparent')
+            $(this).parent().find('.radio-button-label').css('color', 'rgb(107 114 128)')
+        }
+    })
 });
 
 /**
@@ -348,14 +460,28 @@ roleStep.find("#btn-role-next").prop("disabled", true);
 roleStep.find("#btn-role-next").addClass("disabled");
 
 $("#radio-14,#radio-15,#radio-16,#radio-17,#radio-18").on("click", function () {
-    if ($(this).find(".w-checkbox-input").hasClass("w--redirected-checked")) {
+    if ($(this).find(".w-checkbox-input").is(':checked')) {
         $("#btn-role-next").addClass("disabled");
         $("#btn-role-next").prop("disabled", true);
         $("#btn-role-next").attr("onclick", "return false;");
+        $(this).next('.radio-outer').removeClass('active');
     } else {
         $("#btn-role-next").removeClass("disabled");
         $("#btn-role-next").attr("onclick", "goToCompanyInformationStep();");
+        $(this).parent().css('background-color', 'rgb(255 225 210)')
+        $(this).parent().css('border', '2px solid #f47633')
+        $(this).parent().find('.radio-button-label').css('color', '#f47633')
+        $(this).next('.radio-outer').addClass('active');
     }
+
+    $("#radio-14,#radio-15,#radio-16,#radio-17,#radio-18").each(function () {
+        if (!$(this).is(':checked')) {
+            $(this).next('.radio-outer').removeClass('active');
+            $(this).parent().css('background-color', 'white')
+            $(this).parent().css('border', '2px solid transparent')
+            $(this).parent().find('.radio-button-label').css('color', 'rgb(107 114 128)')
+        }
+    })
 });
 
 /**
@@ -403,6 +529,8 @@ $("#email-field").keyup(function () {
     validateEmail();
 });
 
+let emailErrorMessageDisplayed = false;
+
 function validateName() {
     let inputValue = $("#name-field").val();
     inputValue > 0 ? true : false;
@@ -419,10 +547,20 @@ function validateEmail() {
     if (inputValue.match(isValidEmail)) {
         $("#btn-company-information-next").removeClass("disabled");
         $("#btn-company-information-next").attr("onclick", "goToPhoneNumberStep();");
+        $("#email-field").css('border', '2px solid rgb(0 51 160)')
+        if (emailErrorMessageDisplayed == true) {
+            $("#error-email").detach();
+            emailErrorMessageDisplayed = false
+        }
     } else {
         $("#btn-company-information-next").addClass("disabled");
         $("#btn-company-information-next").prop("disabled", true);
         $("#btn-company-information-next").attr("onclick", "return false;");
+        $("#email-field").css('border', '2px solid red')
+        if (emailErrorMessageDisplayed == false) {
+            $("#email-wrap").append("<p id='error-email' style='color:red;'>Please enter a valid value.</p>");
+            emailErrorMessageDisplayed = true
+        }
     }
 }
 
@@ -461,16 +599,28 @@ $("#phone-field").keyup(function () {
     validatePhone();
 });
 
+let phoneErrorMessageDisplayed = false;
+
 function validatePhone() {
     let isValidPhone = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
     let inputValue = $("#phone-field").val();
     if (inputValue.match(isValidPhone)) {
         $("#btn-phone-number-next").removeClass("disabled");
         $("#btn-phone-number-next").attr("onclick", "finalFormSubmission();");
+        $("#phone-field").css('border', '2px solid rgb(0 51 160)')
+        if (phoneErrorMessageDisplayed == true) {
+            $("#error-phone").detach();
+            phoneErrorMessageDisplayed = false
+        }
     } else {
         $("#btn-phone-number-next").addClass("disabled");
         $("#btn-phone-number-next").prop("disabled", true);
         $("#btn-phone-number-next").attr("onclick", "return false;");
+        $("#phone-field").css('border', '2px solid red')
+        if (phoneErrorMessageDisplayed == false) {
+            $("#phone-wrap").append("<p id='error-phone' style='color:red;'>Please enter a valid value.</p>");
+            phoneErrorMessageDisplayed = true
+        }
     }
 }
 
@@ -657,7 +807,7 @@ $(".w-checkbox").each(function (index) {
             $(this).find(".w-checkbox-input").hasClass("w--redirected-checked")
         ) {
             $(this).css("background-color", "white");
-            $(this).css("border", "none");
+            $(this).css("border", "2px solid rgba(0,0,0,0)");
             $(this).find(".checkbox-label").css("color", "#6b7280");
             $(this).find(".svg-icon-form").css("color", "#6b7280");
         } else {
@@ -668,6 +818,67 @@ $(".w-checkbox").each(function (index) {
         }
     });
 });
+
+/**
+ *  Checkbox Icons Correction - When window is less than 992px and the checkbox becomes horizontal,
+ *  Webflow messes up the order of checkbox -> icon -> checkbox label. This corrects this.
+ */
+
+
+var $window = $(window);
+var breakpoint = 992;
+var last = $window.width() > breakpoint;
+
+$window.on('resize', function () {
+    var wWwidth = $window.width();
+    var isLarger = wWwidth >= breakpoint
+
+    if (last !== isLarger) {
+        if (isLarger) {
+            onLargerChange();
+        } else {
+            onSmallerChange();
+        }
+        last = isLarger;
+    }
+});
+
+function onLargerChange() {
+    $('.checkbox-big').each(function (i, obj) {
+        $(this).find('.checkbox-label').detach().prependTo($(this));
+        $(this).find('.w-checkbox-input').detach().prependTo($(this));
+    });
+}
+
+function onSmallerChange() {
+    //gets all checkboxes and swaps the label to the end on smaller sizes
+    $('.checkbox-big').each(function (i, obj) {
+        $(this).find('.checkbox-label').detach().appendTo($(this));
+    });
+}
+
+//this function works on load to check if window is already on mobile, instead of on breakpoint change
+$().ready(function () {
+    if (window.matchMedia("(max-width: 992px)").matches) {
+        $('.checkbox-big').each(function (i, obj) {
+            $(this).find('.checkbox-label').detach().appendTo($(this));
+        });
+    }
+});
+
+/**
+ *  Menu Open Check
+ */
+
+if ($('.bg-menu-overlay').is(':visible')) {
+    $('body').addClass("fixed-position");
+} else {
+    $('body').removeClass("fixed-position");
+}
+
+/**
+ *  Final Form Submission Function
+ */
 
 function finalFormSubmission() {
     console.log("finalFormSubmission")

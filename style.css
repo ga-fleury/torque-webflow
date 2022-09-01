@@ -22,3 +22,32 @@ input[type="radio"] {
 #btn-start-now {
     cursor: pointer;
 }
+
+.fixed-position {
+    position: fixed;
+}
+
+.radio-outer {
+    min-width: 22px;
+    min-height: 22px;
+    border: 1px solid rgba(0, 0, 0, 0.24);
+    border-radius: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 22px;
+    margin-bottom: 22px;
+}
+
+.radio-outer.active {
+    background-color: rgb(255, 106, 19);
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.radio-inner {
+    min-width: 8px;
+    min-height: 8px;
+    background-color: #fff;
+    border-radius: 100%;
+}
