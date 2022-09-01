@@ -559,21 +559,33 @@ $("#email-field").keyup(function () {
 });
 
 let emailErrorMessageDisplayed = false;
+let isNameValid = false;
+let isCompanyNameValid = false;
 
 function validateName() {
     let inputValue = $("#name-field").val();
-    inputValue > 0 ? true : false;
+    if (inputValue > 0) {
+        $("#name-field").css('border', '2px solid rgb(0 51 160)')
+        isNameValid = true
+    } else {
+        isNameValid = false;
+    }
 }
 
 function validateCompanyName() {
     let inputValue = $("#company-name-field").val();
-    inputValue > 0 ? true : false;
+    if (inputValue > 0) {
+        $("#company-name-field").css('border', '2px solid rgb(0 51 160)')
+        isCompanyNameValid = true
+    } else {
+        isCompanyNameValid = false;
+    }
 }
 
 function validateEmail() {
     let isValidEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let inputValue = $("#email-field").val();
-    if (inputValue.match(isValidEmail)) {
+    if (inputValue.match(isValidEmail) && (isNameValid) && isCompanyNameValid) {
         $("#btn-company-information-next").removeClass("disabled");
         $("#btn-company-information-next").attr("onclick", "goToPhoneNumberStep();");
         $("#email-field").css('border', '2px solid rgb(0 51 160)')
