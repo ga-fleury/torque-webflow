@@ -437,6 +437,8 @@ $("#radio-10,#radio-11,#radio-12,#radio-13").on("click", function () {
         $(this).parent().css('border', '2px solid #f47633')
         $(this).parent().find('.radio-button-label').css('color', '#f47633')
         $(this).next('.radio-outer').addClass('active');
+        $(this).parent().find('.checkbox-label').css('color', '#f47633')
+        $(this).parent().find('.svg-icon-form').css('color', '#f47633')
     }
 
     $("#radio-10,#radio-11,#radio-12,#radio-13").each(function () {
@@ -445,6 +447,8 @@ $("#radio-10,#radio-11,#radio-12,#radio-13").on("click", function () {
             $(this).parent().css('background-color', 'white')
             $(this).parent().css('border', '2px solid transparent')
             $(this).parent().find('.radio-button-label').css('color', 'rgb(107 114 128)')
+            $(this).parent().find(".checkbox-label").css("color", "#6b7280");
+            $(this).parent().find(".svg-icon-form").css("color", "#6b7280");
         }
     })
 });
