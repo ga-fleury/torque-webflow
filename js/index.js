@@ -564,7 +564,7 @@ let isCompanyNameValid = false;
 
 function validateName() {
     let inputValue = $("#name-field").val();
-    if (inputValue > 0) {
+    if (inputValue.length > 0) {
         $("#name-field").css('border', '2px solid rgb(0 51 160)')
         isNameValid = true
     } else {
@@ -574,7 +574,7 @@ function validateName() {
 
 function validateCompanyName() {
     let inputValue = $("#company-name-field").val();
-    if (inputValue > 0) {
+    if (inputValue.length > 0) {
         $("#company-name-field").css('border', '2px solid rgb(0 51 160)')
         isCompanyNameValid = true
     } else {
