@@ -1,17 +1,77 @@
 /**
+ * Gets all the UTMs being passed as soon as the use enters the page
+ */
+const pageUTMs = window.location.search;
+console.log(pageUTMs)
+
+/**
  * Removes all sucesses and fails from the different form snippets
  */
-$('.w-form-fail').each(function (i, obj) {
+$(".w-form-fail").each(function () {
     $(this).detach();
 });
 
-$('.w-form-done').each(function (i, obj) {
+$(".w-form-done").each(function () {
     $(this).detach();
 });
 
-$('input[type=radio]').each(function () {
-    $(this).after("<div class='radio-outer'> <div class='radio-inner'> </div></div>")
-    $(this).css('display', 'none')
+$("input[type=radio]").each(function () {
+    $(this).after(
+        "<div class='radio-outer'> <div class='radio-inner'> </div></div>"
+    );
+    $(this).css("display", "none");
+});
+
+/**
+ * Radio Button hover effects
+ */
+
+function radioIn() {
+    if (!$(this).find(".w-radio-input").is(":checked")) {
+        $(this).find(".radio-inner").addClass("hover");
+    }
+    $(this).css("border", "2px solid #f47633");
+}
+
+function radioOut() {
+    if (!$(this).find(".w-radio-input").is(":checked")) {
+        $(this).css("border", "2px solid transparent");
+    }
+    $(this).find(".radio-inner").removeClass("hover");
+}
+
+function checkboxIn() {
+    $(this).css("border", "2px solid #f47633");
+}
+
+function checkboxOut() {
+    if (!$(this).find(".w-checkbox-input").hasClass("w--redirected-checked")) {
+        $(this).css("border", "2px solid transparent");
+    }
+}
+
+/**
+ * Checkboxes Checked effect
+ */
+
+$(".w-checkbox").each(function (index) {
+    $(this).on("click", function () {
+        if (
+            $(this).find(".w-checkbox-input").hasClass("w--redirected-checked")
+        ) {
+            $(this).css("background-color", "white");
+            $(this).css("border", "2px solid rgba(0,0,0,0)");
+            $(this).find(".checkbox-label").css("color", "#6b7280");
+            $(this).find(".svg-icon-form").css("color", "#6b7280");
+        } else {
+            $(this).css("background-color", "#ffe1d2");
+            $(this).css("border", "2px solid rgb(255, 106, 19");
+            $(this).find(".checkbox-label").css("color", "rgb(255, 106, 19");
+            $(this).find(".svg-icon-form").css("color", "rgb(255, 106, 19");
+        }
+    });
+
+    $(this).hover(checkboxIn, checkboxOut);
 });
 
 /**
@@ -30,6 +90,7 @@ const REGISTRATION_FORM_STEPS = {
     ROLE_STEP: 8,
     COMPANY_INFORMATION_STEP: 9,
     PHONE_NUMBER_STEP: 10,
+    THANK_YOU_STEP: 11,
 };
 
 // ----------------------- Some shared DOM elements --------------------------------
@@ -45,7 +106,9 @@ const registrationFormContainerSelector = "#reg-form-container";
  */
 const registrationFormContainer = $(registrationFormContainerSelector);
 
-// ------------------------ STEP 1 FIELDS (Early Access) -----------------------------
+// =============================== STEPS START =====================================
+
+// ------------------------ STEP 1 (Early Access) -----------------------------
 
 /**
  * A reference to the DOM container of the elements on the first step.
@@ -90,12 +153,16 @@ const serviceTypeStep = $("#service-type-step", registrationFormContainer);
 serviceTypeStep.find("#btn-service-type-next").prop("disabled", true);
 serviceTypeStep.find("#btn-service-type-next").addClass("disabled");
 
+/**
+ * Selects the checkboxes (<div> tag) as well as the checks (<input> tag) for that particular step
+ */
+
 const checkboxesServiceType = $("#checkbox11,#checkbox12,#checkbox13");
 const checksServiceType = $("#check11,#check12,#check13");
 
 checkboxesServiceType.on("click", function () {
     let checks = 0;
-    $(checksServiceType).each(function (i, obj) {
+    $(checksServiceType).each(function () {
         if (this.checked) {
             checks++;
         }
@@ -129,52 +196,42 @@ $("#btn-service-type-next", registrationFormContainer).on("click", function () {
 // ------------------------ STEP - LOCATIONS -----------------------------
 
 /**
- * A reference to the DOM container of the elements on the "error" step.
+ * A reference to the DOM container of the elements on the "locations" step.
  */
 const locationsStep = $("#locations-step", registrationFormContainer);
 locationsStep.find("#btn-location-next").prop("disabled", true);
 locationsStep.find("#btn-location-next").addClass("disabled");
 
 $("#radio-1,#radio-2").on("click", function () {
-    if ($(this).find(".w-checkbox-input").is(':checked')) {
+    if ($(this).find(".w-checkbox-input").is(":checked")) {
         $("#btn-location-next").addClass("disabled");
         $("#btn-location-next").prop("disabled", true);
         $("#btn-location-next").attr("onclick", "return false;");
-        $(this).next('.radio-outer').removeClass('active');
+        $(this).next(".radio-outer").removeClass("active");
     } else {
         $("#btn-location-next").removeClass("disabled");
         $("#btn-location-next").attr("onclick", "goToZipCodeStep();");
-        $(this).parent().css('background-color', 'rgb(255 225 210)')
-        $(this).parent().css('border', '2px solid #f47633')
-        $(this).parent().find('.radio-button-label').css('color', '#f47633')
-        $(this).next('.radio-outer').addClass('active');
+        $(this).parent().css("background-color", "rgb(255 225 210)");
+        $(this).parent().css("border", "2px solid #f47633");
+        $(this).parent().find(".radio-button-label").css("color", "#f47633");
+        $(this).next(".radio-outer").addClass("active");
     }
 
     $("#radio-1,#radio-2").each(function () {
-        if (!$(this).is(':checked')) {
-            $(this).next('.radio-outer').removeClass('active');
-            $(this).parent().css('background-color', 'white')
-            $(this).parent().css('border', '2px solid transparent')
-            $(this).parent().find('.radio-button-label').css('color', 'rgb(107 114 128)')
+        if (!$(this).is(":checked")) {
+            $(this).next(".radio-outer").removeClass("active");
+            $(this).parent().css("background-color", "white");
+            $(this).parent().css("border", "2px solid transparent");
+            $(this)
+                .parent()
+                .find(".radio-button-label")
+                .css("color", "rgb(107 114 128)");
         }
-    })
+    });
 });
 
 $("#radio-1,#radio-2").parent().hover(radioIn, radioOut);
 
-function radioIn() {
-    if (!$(this).find('.w-radio-input').is(':checked')) {
-        $(this).find('.radio-inner').addClass('hover');
-    }
-    $(this).css('border', '2px solid #f47633')
-}
-
-function radioOut() {
-    if (!$(this).find('.w-radio-input').is(':checked')) {
-        $(this).css('border', '2px solid transparent')
-    }
-    $(this).find('.radio-inner').removeClass('hover');
-}
 /**
  * Form nav buttons
  */
@@ -205,12 +262,11 @@ $("#zip-code-field").keyup(function () {
     validateZipCode();
 });
 
-$('#zip-code-field').submit(function () {
+$("#zip-code-field").submit(function () {
     return false;
 });
 
 function validateZipCode() {
-
     const isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
     const inputValue = $("#zip-code-field").val();
 
@@ -224,10 +280,10 @@ function validateZipCode() {
 function zipCodeValidStyling() {
     $("#btn-zip-code-next").removeClass("disabled");
     $("#btn-zip-code-next").attr("onclick", "goToFleetMakeupStep();");
-    $("#zip-code-field").css('border', '2px solid rgb(0 51 160)')
+    $("#zip-code-field").css("border", "2px solid rgb(0 51 160)");
     if (zipErrorMessageDisplayed == true) {
         $("#error-zip").detach();
-        zipErrorMessageDisplayed = false
+        zipErrorMessageDisplayed = false;
     }
 }
 
@@ -235,10 +291,12 @@ function zipCodeInvalidStyling() {
     $("#btn-zip-code-next").addClass("disabled");
     $("#btn-zip-code-next").prop("disabled", true);
     $("#btn-zip-code-next").attr("onclick", "return false;");
-    $("#zip-code-field").css('border', '2px solid red')
+    $("#zip-code-field").css("border", "2px solid red");
     if (zipErrorMessageDisplayed == false) {
-        $("#zip-code-wrap").append("<p id='error-zip' style='color:red;'>Please enter a valid value.</p>");
-        zipErrorMessageDisplayed = true
+        $("#zip-code-wrap").append(
+            "<p id='error-zip' style='color:red;'>Please enter a valid value.</p>"
+        );
+        zipErrorMessageDisplayed = true;
     }
 }
 
@@ -262,13 +320,15 @@ $("#btn-zip-code-next", registrationFormContainer).on("click", function () {
 // ------------------------ STEP - FLEET MAKEUP -----------------------------
 
 /**
- * A reference to the DOM container of the elements on the "error" step.
+ * A reference to the DOM container of the elements on the "fleet makeup" step.
  */
 const fleetMakeupStep = $("#fleet-makeup-step", registrationFormContainer);
 fleetMakeupStep.find("#btn-fleet-makeup-next").prop("disabled", true);
 fleetMakeupStep.find("#btn-fleet-makeup-next").addClass("disabled");
 
-const checkboxesFleetMakeup = $("#checkbox21,#checkbox22,#checkbox23,#checkbox24");
+const checkboxesFleetMakeup = $(
+    "#checkbox21,#checkbox22,#checkbox23,#checkbox24"
+);
 const checksFleetMakeup = $("#check21,#check22,#check23,#check24");
 
 checkboxesFleetMakeup.on("click", function () {
@@ -308,7 +368,7 @@ $("#btn-fleet-makeup-next", registrationFormContainer).on("click", function () {
 // ------------------------ STEP - FLEET SIZE -----------------------------
 
 /**
- * A reference to the DOM container of the elements on the "error" step.
+ * A reference to the DOM container of the elements on the "fleet size" step.
  */
 const fleetSizeStep = $("#fleet-size-step", registrationFormContainer);
 fleetSizeStep.find("#btn-fleet-size-next").prop("disabled", true);
@@ -317,28 +377,31 @@ fleetSizeStep.find("#btn-fleet-size-next").addClass("disabled");
 $("#radio-3,#radio-4,#radio-5,#radio-6").parent().hover(radioIn, radioOut);
 
 $("#radio-3,#radio-4,#radio-5,#radio-6").on("click", function () {
-    if ($(this).find(".w-checkbox-input").is(':checked')) {
+    if ($(this).find(".w-checkbox-input").is(":checked")) {
         $("#btn-fleet-size-next").addClass("disabled");
         $("#btn-fleet-size-next").prop("disabled", true);
         $("#btn-fleet-size-next").attr("onclick", "return false;");
-        $(this).next('.radio-outer').removeClass('active');
+        $(this).next(".radio-outer").removeClass("active");
     } else {
         $("#btn-fleet-size-next").removeClass("disabled");
         $("#btn-fleet-size-next").attr("onclick", "goToHowOftenStep();");
-        $(this).parent().css('background-color', 'rgb(255 225 210)')
-        $(this).parent().css('border', '2px solid #f47633')
-        $(this).parent().find('.radio-button-label').css('color', '#f47633')
-        $(this).next('.radio-outer').addClass('active');
+        $(this).parent().css("background-color", "rgb(255 225 210)");
+        $(this).parent().css("border", "2px solid #f47633");
+        $(this).parent().find(".radio-button-label").css("color", "#f47633");
+        $(this).next(".radio-outer").addClass("active");
     }
 
     $("#radio-3,#radio-4,#radio-5,#radio-6").each(function () {
-        if (!$(this).is(':checked')) {
-            $(this).next('.radio-outer').removeClass('active');
-            $(this).parent().css('background-color', 'white')
-            $(this).parent().css('border', '2px solid transparent')
-            $(this).parent().find('.radio-button-label').css('color', 'rgb(107 114 128)')
+        if (!$(this).is(":checked")) {
+            $(this).next(".radio-outer").removeClass("active");
+            $(this).parent().css("background-color", "white");
+            $(this).parent().css("border", "2px solid transparent");
+            $(this)
+                .parent()
+                .find(".radio-button-label")
+                .css("color", "rgb(107 114 128)");
         }
-    })
+    });
 });
 
 /**
@@ -361,7 +424,7 @@ $("#btn-fleet-size-next", registrationFormContainer).on("click", function () {
 // ------------------------ STEP - HOW OFTEN -----------------------------
 
 /**
- * A reference to the DOM container of the elements on the "error" step.
+ * A reference to the DOM container of the elements on the "how often" step.
  */
 const howOftenStep = $("#how-often-step", registrationFormContainer);
 howOftenStep.find("#btn-how-often-next").prop("disabled", true);
@@ -369,30 +432,32 @@ howOftenStep.find("#btn-how-often-next").addClass("disabled");
 
 $("#radio-7,#radio-8,#radio-9").parent().hover(radioIn, radioOut);
 
-
 $("#radio-7,#radio-8,#radio-9").on("click", function () {
-    if ($(this).find(".w-checkbox-input").is(':checked')) {
+    if ($(this).find(".w-checkbox-input").is(":checked")) {
         $("#btn-how-often-next").addClass("disabled");
         $("#btn-how-often-next").prop("disabled", true);
         $("#btn-how-often-next").attr("onclick", "return false;");
-        $(this).next('.radio-outer').removeClass('active');
+        $(this).next(".radio-outer").removeClass("active");
     } else {
         $("#btn-how-often-next").removeClass("disabled");
         $("#btn-how-often-next").attr("onclick", "goToBusinessTypeStep();");
-        $(this).parent().css('background-color', 'rgb(255 225 210)')
-        $(this).parent().css('border', '2px solid #f47633')
-        $(this).parent().find('.radio-button-label').css('color', '#f47633')
-        $(this).next('.radio-outer').addClass('active');
+        $(this).parent().css("background-color", "rgb(255 225 210)");
+        $(this).parent().css("border", "2px solid #f47633");
+        $(this).parent().find(".radio-button-label").css("color", "#f47633");
+        $(this).next(".radio-outer").addClass("active");
     }
 
     $("#radio-7,#radio-8,#radio-9").each(function () {
-        if (!$(this).is(':checked')) {
-            $(this).next('.radio-outer').removeClass('active');
-            $(this).parent().css('background-color', 'white')
-            $(this).parent().css('border', '2px solid transparent')
-            $(this).parent().find('.radio-button-label').css('color', 'rgb(107 114 128)')
+        if (!$(this).is(":checked")) {
+            $(this).next(".radio-outer").removeClass("active");
+            $(this).parent().css("background-color", "white");
+            $(this).parent().css("border", "2px solid transparent");
+            $(this)
+                .parent()
+                .find(".radio-button-label")
+                .css("color", "rgb(107 114 128)");
         }
-    })
+    });
 });
 
 /**
@@ -415,7 +480,7 @@ $("#btn-how-often-next", registrationFormContainer).on("click", function () {
 // ------------------------ STEP - BUSINESS TYPE -----------------------------
 
 /**
- * A reference to the DOM container of the elements on the "error" step.
+ * A reference to the DOM container of the elements on the "business type" step.
  */
 const businessTypeStep = $("#business-type-step", registrationFormContainer);
 businessTypeStep.find("#btn-business-type-next").prop("disabled", true);
@@ -423,34 +488,36 @@ businessTypeStep.find("#btn-business-type-next").addClass("disabled");
 
 $("#radio-10,#radio-11,#radio-12,#radio-13").parent().hover(radioIn, radioOut);
 
-
 $("#radio-10,#radio-11,#radio-12,#radio-13").on("click", function () {
-    if ($(this).find(".w-checkbox-input").is(':checked')) {
+    if ($(this).find(".w-checkbox-input").is(":checked")) {
         $("#btn-business-type-next").addClass("disabled");
         $("#btn-business-type-next").prop("disabled", true);
         $("#btn-business-type-next").attr("onclick", "return false;");
-        $(this).next('.radio-outer').removeClass('active');
+        $(this).next(".radio-outer").removeClass("active");
     } else {
         $("#btn-business-type-next").removeClass("disabled");
         $("#btn-business-type-next").attr("onclick", "goToRoleStep();");
-        $(this).parent().css('background-color', 'rgb(255 225 210)')
-        $(this).parent().css('border', '2px solid #f47633')
-        $(this).parent().find('.radio-button-label').css('color', '#f47633')
-        $(this).next('.radio-outer').addClass('active');
-        $(this).parent().find('.checkbox-label').css('color', '#f47633')
-        $(this).parent().find('.svg-icon-form').css('color', '#f47633')
+        $(this).parent().css("background-color", "rgb(255 225 210)");
+        $(this).parent().css("border", "2px solid #f47633");
+        $(this).parent().find(".radio-button-label").css("color", "#f47633");
+        $(this).next(".radio-outer").addClass("active");
+        $(this).parent().find(".checkbox-label").css("color", "#f47633");
+        $(this).parent().find(".svg-icon-form").css("color", "#f47633");
     }
 
     $("#radio-10,#radio-11,#radio-12,#radio-13").each(function () {
-        if (!$(this).is(':checked')) {
-            $(this).next('.radio-outer').removeClass('active');
-            $(this).parent().css('background-color', 'white')
-            $(this).parent().css('border', '2px solid transparent')
-            $(this).parent().find('.radio-button-label').css('color', 'rgb(107 114 128)')
+        if (!$(this).is(":checked")) {
+            $(this).next(".radio-outer").removeClass("active");
+            $(this).parent().css("background-color", "white");
+            $(this).parent().css("border", "2px solid transparent");
+            $(this)
+                .parent()
+                .find(".radio-button-label")
+                .css("color", "rgb(107 114 128)");
             $(this).parent().find(".checkbox-label").css("color", "#6b7280");
             $(this).parent().find(".svg-icon-form").css("color", "#6b7280");
         }
-    })
+    });
 });
 
 /**
@@ -479,38 +546,42 @@ $("#btn-business-type-next", registrationFormContainer).on(
 // ------------------------ STEP - ROLE -----------------------------
 
 /**
- * A reference to the DOM container of the elements on the "error" step.
+ * A reference to the DOM container of the elements on the "role" step.
  */
 const roleStep = $("#role-step", registrationFormContainer);
 roleStep.find("#btn-role-next").prop("disabled", true);
 roleStep.find("#btn-role-next").addClass("disabled");
 
-$("#radio-14,#radio-15,#radio-16,#radio-17,#radio-18").parent().hover(radioIn, radioOut);
-
+$("#radio-14,#radio-15,#radio-16,#radio-17,#radio-18")
+    .parent()
+    .hover(radioIn, radioOut);
 
 $("#radio-14,#radio-15,#radio-16,#radio-17,#radio-18").on("click", function () {
-    if ($(this).find(".w-checkbox-input").is(':checked')) {
+    if ($(this).find(".w-checkbox-input").is(":checked")) {
         $("#btn-role-next").addClass("disabled");
         $("#btn-role-next").prop("disabled", true);
         $("#btn-role-next").attr("onclick", "return false;");
-        $(this).next('.radio-outer').removeClass('active');
+        $(this).next(".radio-outer").removeClass("active");
     } else {
         $("#btn-role-next").removeClass("disabled");
         $("#btn-role-next").attr("onclick", "goToCompanyInformationStep();");
-        $(this).parent().css('background-color', 'rgb(255 225 210)')
-        $(this).parent().css('border', '2px solid #f47633')
-        $(this).parent().find('.radio-button-label').css('color', '#f47633')
-        $(this).next('.radio-outer').addClass('active');
+        $(this).parent().css("background-color", "rgb(255 225 210)");
+        $(this).parent().css("border", "2px solid #f47633");
+        $(this).parent().find(".radio-button-label").css("color", "#f47633");
+        $(this).next(".radio-outer").addClass("active");
     }
 
     $("#radio-14,#radio-15,#radio-16,#radio-17,#radio-18").each(function () {
-        if (!$(this).is(':checked')) {
-            $(this).next('.radio-outer').removeClass('active');
-            $(this).parent().css('background-color', 'white')
-            $(this).parent().css('border', '2px solid transparent')
-            $(this).parent().find('.radio-button-label').css('color', 'rgb(107 114 128)')
+        if (!$(this).is(":checked")) {
+            $(this).next(".radio-outer").removeClass("active");
+            $(this).parent().css("background-color", "white");
+            $(this).parent().css("border", "2px solid transparent");
+            $(this)
+                .parent()
+                .find(".radio-button-label")
+                .css("color", "rgb(107 114 128)");
         }
-    })
+    });
 });
 
 /**
@@ -532,7 +603,7 @@ $("#btn-role-next", registrationFormContainer).on("click", function () {
 // ------------------------ STEP - NAME AND COMPANY -----------------------------
 
 /**
- * A reference to the DOM container of the elements on the "error" step.
+ * A reference to the DOM container of the elements on the "name and company" step.
  */
 const companyInformationStep = $(
     "#company-information-step",
@@ -565,8 +636,8 @@ let isCompanyNameValid = false;
 function validateName() {
     let inputValue = $("#name-field").val();
     if (inputValue.length > 0) {
-        $("#name-field").css('border', '2px solid rgb(0 51 160)')
-        isNameValid = true
+        $("#name-field").css("border", "2px solid rgb(0 51 160)");
+        isNameValid = true;
     } else {
         isNameValid = false;
     }
@@ -575,8 +646,8 @@ function validateName() {
 function validateCompanyName() {
     let inputValue = $("#company-name-field").val();
     if (inputValue.length > 0) {
-        $("#company-name-field").css('border', '2px solid rgb(0 51 160)')
-        isCompanyNameValid = true
+        $("#company-name-field").css("border", "2px solid rgb(0 51 160)");
+        isCompanyNameValid = true;
     } else {
         isCompanyNameValid = false;
     }
@@ -585,22 +656,27 @@ function validateCompanyName() {
 function validateEmail() {
     let isValidEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let inputValue = $("#email-field").val();
-    if (inputValue.match(isValidEmail) && (isNameValid) && isCompanyNameValid) {
+    if (inputValue.match(isValidEmail) && isNameValid && isCompanyNameValid) {
         $("#btn-company-information-next").removeClass("disabled");
-        $("#btn-company-information-next").attr("onclick", "goToPhoneNumberStep();");
-        $("#email-field").css('border', '2px solid rgb(0 51 160)')
+        $("#btn-company-information-next").attr(
+            "onclick",
+            "goToPhoneNumberStep();"
+        );
+        $("#email-field").css("border", "2px solid rgb(0 51 160)");
         if (emailErrorMessageDisplayed == true) {
             $("#error-email").detach();
-            emailErrorMessageDisplayed = false
+            emailErrorMessageDisplayed = false;
         }
     } else {
         $("#btn-company-information-next").addClass("disabled");
         $("#btn-company-information-next").prop("disabled", true);
         $("#btn-company-information-next").attr("onclick", "return false;");
-        $("#email-field").css('border', '2px solid red')
+        $("#email-field").css("border", "2px solid red");
         if (emailErrorMessageDisplayed == false) {
-            $("#email-wrap").append("<p id='error-email' style='color:red;'>Please enter a valid value.</p>");
-            emailErrorMessageDisplayed = true
+            $("#email-wrap").append(
+                "<p id='error-email' style='color:red;'>Please enter a valid value.</p>"
+            );
+            emailErrorMessageDisplayed = true;
         }
     }
 }
@@ -630,7 +706,7 @@ $("#btn-company-information-next", registrationFormContainer).on(
 // ------------------------ STEP - PHONE NUMBER -----------------------------
 
 /**
- * A reference to the DOM container of the elements on the "error" step.
+ * A reference to the DOM container of the elements on the "phone number" step.
  */
 const phoneNumberStep = $("#phone-number-step", registrationFormContainer);
 phoneNumberStep.find("#btn-phone-number-next").prop("disabled", true);
@@ -648,25 +724,24 @@ function validatePhone() {
     if (inputValue.match(isValidPhone)) {
         $("#btn-phone-number-next").removeClass("disabled");
         $("#btn-phone-number-next").attr("onclick", "finalFormSubmission();");
-        $("#phone-field").css('border', '2px solid rgb(0 51 160)')
+        $("#phone-field").css("border", "2px solid rgb(0 51 160)");
         if (phoneErrorMessageDisplayed == true) {
             $("#error-phone").detach();
-            phoneErrorMessageDisplayed = false
+            phoneErrorMessageDisplayed = false;
         }
     } else {
         $("#btn-phone-number-next").addClass("disabled");
         $("#btn-phone-number-next").prop("disabled", true);
         $("#btn-phone-number-next").attr("onclick", "return false;");
-        $("#phone-field").css('border', '2px solid red')
+        $("#phone-field").css("border", "2px solid red");
         if (phoneErrorMessageDisplayed == false) {
-            $("#phone-wrap").append("<p id='error-phone' style='color:red;'>Please enter a valid value.</p>");
-            phoneErrorMessageDisplayed = true
+            $("#phone-wrap").append(
+                "<p id='error-phone' style='color:red;'>Please enter a valid value.</p>"
+            );
+            phoneErrorMessageDisplayed = true;
         }
     }
 }
-
-
-
 
 /**
  * Form nav buttons
@@ -679,13 +754,21 @@ $("#btn-phone-number-next", registrationFormContainer).on("click", function () {
     if ($(this).has("disabled")) {
         return false;
     } else {
+        goToThankYouStep();
         finalFormSubmission();
         return false;
     }
 });
 
-// TODO
-// [] FORM SUBMISSION FUNCTION
+// ------------------------ STEP - THANK YOU  -----------------------------
+
+/**
+ * A reference to the DOM container of the elements on the "thank you" step.
+ */
+
+const thankYouStep = $("#thank-you-step", registrationFormContainer);
+
+// ======================== STEPS END ===================================
 
 /**
  * Manually triggers the given Webflow Slider navigation element/control
@@ -717,7 +800,7 @@ const getRegistrationFormNavigationControl = (index) => {
 };
 
 /**
- * Goes to the Registration Form "error" step.
+ * Goes to the First step of the form
  */
 const goToEarlyAccessStep = () => {
     triggerWebflowSliderNavigationControl(
@@ -727,7 +810,7 @@ const goToEarlyAccessStep = () => {
     );
 };
 /**
- * Goes to the Registration Form "error" step.
+ * Goes to the service type step
  */
 const goToServiceTypeStep = () => {
     triggerWebflowSliderNavigationControl(
@@ -738,7 +821,7 @@ const goToServiceTypeStep = () => {
 };
 
 /**
- * Goes to the Registration "success" screen.
+ * Goes to the location step
  */
 const goToLocationsStep = () => {
     triggerWebflowSliderNavigationControl(
@@ -749,7 +832,7 @@ const goToLocationsStep = () => {
 };
 
 /**
- * Goes to the screen for users with already existing accounts.
+ * Goes to the zip code step
  */
 const goToZipCodeStep = () => {
     triggerWebflowSliderNavigationControl(
@@ -760,7 +843,7 @@ const goToZipCodeStep = () => {
 };
 
 /**
- * Goes to the screen for users that were put on a Pending Account.
+ * Goes to the fleet make up step
  */
 const goToFleetMakeupStep = () => {
     triggerWebflowSliderNavigationControl(
@@ -771,7 +854,7 @@ const goToFleetMakeupStep = () => {
 };
 
 /**
- * Goes to the screen for users that were rejected for Registration.
+ * Goes to the fleet size step
  */
 const goToFleetSizeStep = () => {
     triggerWebflowSliderNavigationControl(
@@ -782,7 +865,7 @@ const goToFleetSizeStep = () => {
 };
 
 /**
- * Goes to the Registration form main screen.
+ * Goes to the 'how often do you need service' step
  */
 const goToHowOftenStep = () => {
     triggerWebflowSliderNavigationControl(
@@ -793,7 +876,7 @@ const goToHowOftenStep = () => {
 };
 
 /**
- * Goes to the Registration form main screen.
+ * Goes to the business type step
  */
 const goToBusinessTypeStep = () => {
     triggerWebflowSliderNavigationControl(
@@ -804,7 +887,7 @@ const goToBusinessTypeStep = () => {
 };
 
 /**
- * Goes to the Registration form main screen.
+ * Goes to the company role step
  */
 const goToRoleStep = () => {
     triggerWebflowSliderNavigationControl(
@@ -813,7 +896,7 @@ const goToRoleStep = () => {
 };
 
 /**
- * Goes to the Registration form main screen.
+ * Goes to the company information step
  */
 const goToCompanyInformationStep = () => {
     triggerWebflowSliderNavigationControl(
@@ -824,7 +907,7 @@ const goToCompanyInformationStep = () => {
 };
 
 /**
- * Goes to the Registration form main screen.
+ * Goes to the phone number step
  */
 const goToPhoneNumberStep = () => {
     triggerWebflowSliderNavigationControl(
@@ -834,30 +917,19 @@ const goToPhoneNumberStep = () => {
     );
 };
 
+/**
+ * Goes to the thank you message step
+ */
+const goToThankYouStep = () => {
+    triggerWebflowSliderNavigationControl(
+        getRegistrationFormNavigationControl(
+            REGISTRATION_FORM_STEPS.THANK_YOU_STEP
+        )
+    );
+};
+
 $("#btn-start-now", registrationFormContainer).on("click", function () {
     goToServiceTypeStep();
-});
-
-/**
- * LeadForm Checkbox Checked
- */
-
-$(".w-checkbox").each(function (index) {
-    $(this).on("click", function () {
-        if (
-            $(this).find(".w-checkbox-input").hasClass("w--redirected-checked")
-        ) {
-            $(this).css("background-color", "white");
-            $(this).css("border", "2px solid rgba(0,0,0,0)");
-            $(this).find(".checkbox-label").css("color", "#6b7280");
-            $(this).find(".svg-icon-form").css("color", "#6b7280");
-        } else {
-            $(this).css("background-color", "#ffe1d2");
-            $(this).css("border", "2px solid rgb(255, 106, 19");
-            $(this).find(".checkbox-label").css("color", "rgb(255, 106, 19");
-            $(this).find(".svg-icon-form").css("color", "rgb(255, 106, 19");
-        }
-    });
 });
 
 /**
@@ -865,14 +937,13 @@ $(".w-checkbox").each(function (index) {
  *  Webflow messes up the order of checkbox -> icon -> checkbox label. This corrects this.
  */
 
-
 var $window = $(window);
 var breakpoint = 992;
 var last = $window.width() > breakpoint;
 
-$window.on('resize', function () {
+$window.on("resize", function () {
     var wWwidth = $window.width();
-    var isLarger = wWwidth >= breakpoint
+    var isLarger = wWwidth >= breakpoint;
 
     if (last !== isLarger) {
         if (isLarger) {
@@ -885,24 +956,24 @@ $window.on('resize', function () {
 });
 
 function onLargerChange() {
-    $('.checkbox-big').each(function (i, obj) {
-        $(this).find('.checkbox-label').detach().prependTo($(this));
-        $(this).find('.w-checkbox-input').detach().prependTo($(this));
+    $(".checkbox-big").each(function (i, obj) {
+        $(this).find(".checkbox-label").detach().prependTo($(this));
+        $(this).find(".w-checkbox-input").detach().prependTo($(this));
     });
 }
 
 function onSmallerChange() {
     //gets all checkboxes and swaps the label to the end on smaller sizes
-    $('.checkbox-big').each(function (i, obj) {
-        $(this).find('.checkbox-label').detach().appendTo($(this));
+    $(".checkbox-big").each(function (i, obj) {
+        $(this).find(".checkbox-label").detach().appendTo($(this));
     });
 }
 
 //this function works on load to check if window is already on mobile, instead of on breakpoint change
 $().ready(function () {
     if (window.matchMedia("(max-width: 992px)").matches) {
-        $('.checkbox-big').each(function (i, obj) {
-            $(this).find('.checkbox-label').detach().appendTo($(this));
+        $(".checkbox-big").each(function (i, obj) {
+            $(this).find(".checkbox-label").detach().appendTo($(this));
         });
     }
 });
@@ -911,10 +982,10 @@ $().ready(function () {
  *  Menu Open Check
  */
 
-if ($('.bg-menu-overlay').is(':visible')) {
-    $('body').addClass("fixed-position");
+if ($(".bg-menu-overlay").is(":visible")) {
+    $("body").addClass("fixed-position");
 } else {
-    $('body').removeClass("fixed-position");
+    $("body").removeClass("fixed-position");
 }
 
 /**
@@ -922,7 +993,9 @@ if ($('.bg-menu-overlay').is(':visible')) {
  */
 
 function finalFormSubmission() {
-    console.log("finalFormSubmission")
+    console.log("finalFormSubmission");
+    let serialize = $("form").serialize();
+    console.log(serialize);
 }
 
 // $(".w-radio").each(function (index) {
