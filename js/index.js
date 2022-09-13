@@ -1,10 +1,4 @@
 /**
- * Gets all the UTMs being passed as soon as the use enters the page
- */
-const pageUTMs = window.location.search;
-console.log(pageUTMs)
-
-/**
  * Removes all sucesses and fails from the different form snippets
  */
 $(".w-form-fail").each(function () {
@@ -988,14 +982,43 @@ if ($(".bg-menu-overlay").is(":visible")) {
     $("body").removeClass("fixed-position");
 }
 
+
+/**
+ * Sets the correct values for the checkboxes since Webflow won't let you do this
+ */
+$("#check11").attr("value", "Preventive Maintenance");
+$("#check12").attr("value", "Follow Up Repair");
+$("#check12").attr("value", "Other");
+$("#check21").attr("value", "Trucks");
+$("#check22").attr("value", "Tractors");
+$("#check23").attr("value", "Trailers");
+$("#check24").attr("value", "Others");
+
+/**
+ * Gets all the UTMs being passed as soon as the use enters the page
+ */
+const pageUTMs = window.location.search;
+console.log(pageUTMs);
+
 /**
  *  Final Form Submission Function
  */
 
 function finalFormSubmission() {
     console.log("finalFormSubmission");
-    let serialize = $("form").serialize();
-    console.log(serialize);
+    const serialize = $("form").serialize();
+    const UTM_URL = serialize.concat(pageUTMs);
+    const finalQuery = UTM_URL.concat(
+        "&Campaign_ID__c=7018B000000Hw6iQAC&GCLID__c=testing_gclid"
+    );
+    const URL =
+        "https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&debug=1&debugEmail=gabrielf@doublenines.co&oid=00D8B0000008hPZ&";
+    const finalURL = URL.concat(finalQuery);
+    console.log(finalURL);
+
+    fetch(finalURL, {
+        method: "POST",
+    });
 }
 
 // $(".w-radio").each(function (index) {

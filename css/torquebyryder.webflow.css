@@ -1759,6 +1759,10 @@ a {
     justify-content: flex-start;
   }
 
+  .btn-back:hover {
+    background-color: #def1f9;
+  }
+
   .radio-button {
     margin-bottom: 17px;
   }
@@ -1780,6 +1784,19 @@ a {
   .bg-menu-overlay {
     position: fixed;
     display: none;
+  }
+
+  .mobile-menu-link:hover {
+    color: #014486;
+    text-decoration: underline;
+  }
+
+  .list-item-2:hover {
+    background-color: #f4f6f9;
+  }
+
+  .button-2:hover {
+    background-color: #0f1847;
   }
 
   .html-embed-2 {
