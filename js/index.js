@@ -729,7 +729,7 @@ function validatePhone() {
     let inputValue = $("#phone-field").val();
     if (inputValue.match(isValidPhone)) {
         $("#btn-phone-number-next").removeClass("disabled");
-        $("#btn-phone-number-next").attr("onclick", "finalFormSubmission();");
+        $("#btn-phone-number-next").attr("onclick", "goToThankYouStep()");
         $("#phone-field").css("border", "2px solid rgb(0 51 160)");
         if (phoneErrorMessageDisplayed == true) {
             $("#error-phone").detach();
@@ -932,6 +932,7 @@ const goToThankYouStep = () => {
             REGISTRATION_FORM_STEPS.THANK_YOU_STEP
         )
     );
+    finalFormSubmission();
 };
 
 $("#btn-start-now", registrationFormContainer).on("click", function () {
