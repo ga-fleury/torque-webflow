@@ -17,6 +17,18 @@ $("input[type=radio]").each(function () {
 });
 
 /**
+ * Sets the correct values for the checkboxes since Webflow won't let you do this
+ */
+ $("#check11").attr("value", "Preventive Maintenance");
+ $("#check12").attr("value", "Follow Up Repair");
+ $("#check12").attr("value", "Other");
+ $("#check21").attr("value", "Trucks");
+ $("#check22").attr("value", "Tractors");
+ $("#check23").attr("value", "Trailers");
+ $("#check24").attr("value", "Others");
+ 
+
+/**
  * Radio Button hover effects
  */
 
@@ -982,18 +994,6 @@ if ($(".bg-menu-overlay").is(":visible")) {
     $("body").removeClass("fixed-position");
 }
 
-
-/**
- * Sets the correct values for the checkboxes since Webflow won't let you do this
- */
-$("#check11").attr("value", "Preventive Maintenance");
-$("#check12").attr("value", "Follow Up Repair");
-$("#check12").attr("value", "Other");
-$("#check21").attr("value", "Trucks");
-$("#check22").attr("value", "Tractors");
-$("#check23").attr("value", "Trailers");
-$("#check24").attr("value", "Others");
-
 /**
  * Gets all the UTMs being passed as soon as the use enters the page
  */
@@ -1012,7 +1012,7 @@ function finalFormSubmission() {
         "&Campaign_ID__c=7018B000000Hw6iQAC&GCLID__c=testing_gclid"
     );
     const URL =
-        "https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&debug=1&debugEmail=gabrielf@doublenines.co&oid=00D8B0000008hPZ&";
+        "https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&debug=1&debugEmail=mobilemaintenanc@doublenines.co&oid=00D8B0000008hPZ&";
     const finalURL = URL.concat(finalQuery);
     console.log(finalURL);
 
@@ -1021,20 +1021,3 @@ function finalFormSubmission() {
     });
 }
 
-// $(".w-radio").each(function (index) {
-//     $(this).on("click", function () {
-//         if (
-//             $(this).checked
-//         ) {
-//             $(this).css("background-color", "white");
-//             $(this).css("border", "none");
-//             $(this).find(".checkbox-label").css("color", "#6b7280");
-//             $(this).find(".svg-icon-form").css("color", "#6b7280");
-//         } else {
-//             $(this).css("background-color", "#ffe1d2");
-//             $(this).css("border", "2px solid rgb(255, 106, 19");
-//             $(this).find(".checkbox-label").css("color", "rgb(255, 106, 19");
-//             $(this).find(".svg-icon-form").css("color", "rgb(255, 106, 19");
-//         }
-//     });
-// });
