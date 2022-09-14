@@ -1013,7 +1013,7 @@ function finalFormSubmission() {
         "&Campaign_ID__c=7018B000000Hw6iQAC&GCLID__c=testing_gclid"
     );
     const URL =
-        "https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&debug=1&debugEmail=mobilemaintenance@doublenines.co&oid=00D8B0000008hPZ&";
+        "https://rydermm--qa.my.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&debug=1&debugEmail=mobilemaintenance@doublenines.co&oid=00D8B0000008hPZ&";
     const finalURL = URL.concat(finalQuery);
     console.log(finalURL);
 
