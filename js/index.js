@@ -999,7 +999,6 @@ if ($(".bg-menu-overlay").is(":visible")) {
  * Gets all the UTMs being passed as soon as the use enters the page
  */
 const pageUTMs = window.location.search;
-console.log(pageUTMs);
 
 /**
  *  Final Form Submission Function
@@ -1008,7 +1007,9 @@ console.log(pageUTMs);
 function finalFormSubmission() {
     console.log("finalFormSubmission");
     const serialize = $("form").serialize();
-    const UTM_URL = serialize.concat(pageUTMs);
+    const UTM_URL = serialize.concat(`&${pageUTMs.replace("?", "")}`);
+    console.log(pageUTMs)
+    console.log(UTM_URL)
     const finalQuery = UTM_URL.concat(
         "&Campaign_ID__c=7018B000000Hw6iQAC&GCLID__c=testing_gclid"
     );
