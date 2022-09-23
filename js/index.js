@@ -1,3 +1,6 @@
+
+$('#btn-start-now').css('background-color', 'red');
+
 /**
  * Removes all sucesses and fails from the different form snippets
  */
