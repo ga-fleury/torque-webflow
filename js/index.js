@@ -36,7 +36,7 @@ function radioIn() {
     if (!$(this).find(".w-radio-input").is(":checked")) {
         $(this).find(".radio-inner").addClass("hover");
     }
-    $(this).css("border", "2px solid #f47633");
+    $(this).css("border", "2px solid transparent");
 }
 
 function radioOut() {
@@ -47,7 +47,7 @@ function radioOut() {
 }
 
 function checkboxIn() {
-    $(this).css("border", "2px solid #f47633");
+    $(this).css("border", "2px solid transparent");
 }
 
 function checkboxOut() {
@@ -66,14 +66,14 @@ $(".w-checkbox").each(function (index) {
             $(this).find(".w-checkbox-input").hasClass("w--redirected-checked")
         ) {
             $(this).css("background-color", "white");
-            $(this).css("border", "2px solid rgba(0,0,0,0)");
-            $(this).find(".checkbox-label").css("color", "#6b7280");
-            $(this).find(".svg-icon-form").css("color", "#6b7280");
+            $(this).css("border", "2px solid transparent");
+            $(this).find(".checkbox-label").css("color", "#212121");
+            $(this).find(".svg-icon-form").css("color", "0033a0");
         } else {
-            $(this).css("background-color", "#ffe1d2");
-            $(this).css("border", "2px solid rgb(255, 106, 19");
-            $(this).find(".checkbox-label").css("color", "rgb(255, 106, 19");
-            $(this).find(".svg-icon-form").css("color", "rgb(255, 106, 19");
+            $(this).css("background-color", "#EBF1FF");
+            $(this).css("border", "2px solid transparent");
+            $(this).find(".checkbox-label").css("color", "#0033a0");
+            $(this).find(".svg-icon-form").css("color", "#0033a0");
         }
     });
 
@@ -217,9 +217,9 @@ $("#radio-1,#radio-2").on("click", function () {
     } else {
         $("#btn-location-next").removeClass("disabled");
         $("#btn-location-next").attr("onclick", "goToZipCodeStep();");
-        $(this).parent().css("background-color", "rgb(255 225 210)");
-        $(this).parent().css("border", "2px solid #f47633");
-        $(this).parent().find(".radio-button-label").css("color", "#f47633");
+        $(this).parent().css("background-color", "#ebf1ff");
+        $(this).parent().css("border", "2px solid transparent");
+        $(this).parent().find(".radio-button-label").css("color", "#0033a0");
         $(this).next(".radio-outer").addClass("active");
     }
 
@@ -231,7 +231,7 @@ $("#radio-1,#radio-2").on("click", function () {
             $(this)
                 .parent()
                 .find(".radio-button-label")
-                .css("color", "rgb(107 114 128)");
+                .css("color", "#212121");
         }
     });
 });
@@ -297,10 +297,10 @@ function zipCodeInvalidStyling() {
     $("#btn-zip-code-next").addClass("disabled");
     $("#btn-zip-code-next").prop("disabled", true);
     $("#btn-zip-code-next").attr("onclick", "return false;");
-    $("#zip-code-field").css("border", "2px solid red");
+    $("#zip-code-field").css("border", "2px solid #e03600");
     if (zipErrorMessageDisplayed == false) {
         $("#zip-code-wrap").append(
-            "<p id='error-zip' style='color:red;'>Please enter a valid value.</p>"
+            "<p id='error-zip' style='color:#e03600;'>Please enter a valid value.</p>"
         );
         zipErrorMessageDisplayed = true;
     }
@@ -391,9 +391,9 @@ $("#radio-3,#radio-4,#radio-5,#radio-6").on("click", function () {
     } else {
         $("#btn-fleet-size-next").removeClass("disabled");
         $("#btn-fleet-size-next").attr("onclick", "goToHowOftenStep();");
-        $(this).parent().css("background-color", "rgb(255 225 210)");
-        $(this).parent().css("border", "2px solid #f47633");
-        $(this).parent().find(".radio-button-label").css("color", "#f47633");
+        $(this).parent().css("background-color", "#ebf1ff");
+        $(this).parent().css("border", "2px solid transparent");
+        $(this).parent().find(".radio-button-label").css("color", "#EBF1FF");
         $(this).next(".radio-outer").addClass("active");
     }
 
@@ -405,7 +405,7 @@ $("#radio-3,#radio-4,#radio-5,#radio-6").on("click", function () {
             $(this)
                 .parent()
                 .find(".radio-button-label")
-                .css("color", "rgb(107 114 128)");
+                .css("color", "transparent");
         }
     });
 });
@@ -447,9 +447,9 @@ $("#radio-7,#radio-8,#radio-9").on("click", function () {
     } else {
         $("#btn-how-often-next").removeClass("disabled");
         $("#btn-how-often-next").attr("onclick", "goToBusinessTypeStep();");
-        $(this).parent().css("background-color", "rgb(255 225 210)");
-        $(this).parent().css("border", "2px solid #f47633");
-        $(this).parent().find(".radio-button-label").css("color", "#f47633");
+        $(this).parent().css("background-color", "#ebf1ff");
+        $(this).parent().css("border", "2px solid #EBF1FF");
+        $(this).parent().find(".radio-button-label").css("color", "#0033a0");
         $(this).next(".radio-outer").addClass("active");
     }
 
@@ -461,7 +461,7 @@ $("#radio-7,#radio-8,#radio-9").on("click", function () {
             $(this)
                 .parent()
                 .find(".radio-button-label")
-                .css("color", "rgb(107 114 128)");
+                .css("color", "#212121");
         }
     });
 });
@@ -503,12 +503,12 @@ $("#radio-10,#radio-11,#radio-12,#radio-13").on("click", function () {
     } else {
         $("#btn-business-type-next").removeClass("disabled");
         $("#btn-business-type-next").attr("onclick", "goToRoleStep();");
-        $(this).parent().css("background-color", "rgb(255 225 210)");
-        $(this).parent().css("border", "2px solid #f47633");
-        $(this).parent().find(".radio-button-label").css("color", "#f47633");
+        $(this).parent().css("background-color", "#ebf1ff");
+        $(this).parent().css("border", "2px solid transparent");
+        $(this).parent().find(".radio-button-label").css("color", "#0033a0");
         $(this).next(".radio-outer").addClass("active");
-        $(this).parent().find(".checkbox-label").css("color", "#f47633");
-        $(this).parent().find(".svg-icon-form").css("color", "#f47633");
+        $(this).parent().find(".checkbox-label").css("color", "#0033a0");
+        $(this).parent().find(".svg-icon-form").css("color", "#0033a0");
     }
 
     $("#radio-10,#radio-11,#radio-12,#radio-13").each(function () {
@@ -519,7 +519,7 @@ $("#radio-10,#radio-11,#radio-12,#radio-13").on("click", function () {
             $(this)
                 .parent()
                 .find(".radio-button-label")
-                .css("color", "rgb(107 114 128)");
+                .css("color", "#0033a0");
             $(this).parent().find(".checkbox-label").css("color", "#6b7280");
             $(this).parent().find(".svg-icon-form").css("color", "#6b7280");
         }
@@ -571,9 +571,9 @@ $("#radio-14,#radio-15,#radio-16,#radio-17,#radio-18").on("click", function () {
     } else {
         $("#btn-role-next").removeClass("disabled");
         $("#btn-role-next").attr("onclick", "goToCompanyInformationStep();");
-        $(this).parent().css("background-color", "rgb(255 225 210)");
-        $(this).parent().css("border", "2px solid #f47633");
-        $(this).parent().find(".radio-button-label").css("color", "#f47633");
+        $(this).parent().css("background-color", "#ebf1ff");
+        $(this).parent().css("border", "2px solid #0033a0");
+        $(this).parent().find(".radio-button-label").css("color", "#0033a0");
         $(this).next(".radio-outer").addClass("active");
     }
 
@@ -585,7 +585,7 @@ $("#radio-14,#radio-15,#radio-16,#radio-17,#radio-18").on("click", function () {
             $(this)
                 .parent()
                 .find(".radio-button-label")
-                .css("color", "rgb(107 114 128)");
+                .css("color", "#212121");
         }
     });
 });
