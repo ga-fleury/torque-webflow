@@ -300,7 +300,7 @@ function zipCodeInvalidStyling() {
     $("#zip-code-field").css("border", "2px solid #e03600");
     if (zipErrorMessageDisplayed == false) {
         $("#zip-code-wrap").append(
-            "<p id='error-zip' style='color:#e03600;'>Please enter a valid value.</p>"
+            "<p id='error-zip' style='color: aliceblue;'>Please enter a valid value.</p>"
         );
         zipErrorMessageDisplayed = true;
     }
