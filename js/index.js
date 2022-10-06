@@ -680,7 +680,7 @@ function validateEmail() {
         $("#email-field").css("border", "2px solid red");
         if (emailErrorMessageDisplayed == false) {
             $("#email-wrap").append(
-                "<p id='error-email' style='color:red;'>Please enter a valid value.</p>"
+                "<p id='error-email' style='color: aliceblue;'>Please enter a valid value.</p>"
             );
             emailErrorMessageDisplayed = true;
         }
@@ -742,7 +742,7 @@ function validatePhone() {
         $("#phone-field").css("border", "2px solid red");
         if (phoneErrorMessageDisplayed == false) {
             $("#phone-wrap").append(
-                "<p id='error-phone' style='color:red;'>Please enter a valid value.</p>"
+                "<p id='error-phone' style='color: aliceblue;'>Please enter a valid value.</p>"
             );
             phoneErrorMessageDisplayed = true;
         }
