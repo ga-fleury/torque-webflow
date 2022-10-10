@@ -988,8 +988,10 @@ $().ready(function () {
  *  Menu Open Check
  */
 
-$("#button1").on("click", function () {
-    if ($("#navshadow").is(":hidden")) {
+ const navButtons = $("#button1,#button2");
+
+navButtons.on("click", function () {
+    if ($(".nav-shadow").is(":hidden")) {
         $("body").addClass("overflow-hidden");
     } else {
         $("body").removeClass("overflow-hidden");
