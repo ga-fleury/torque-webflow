@@ -1058,19 +1058,7 @@ document.getElementById("zip-code-field").addEventListener("input", function() {
   }
 });
 </script>
-  <script>
-window.addEventListener('click', function(e){
-	if (document.getElementById('zip-code-field').contains(e.target)){
-  	document.getElementById("error-zip").style.display = "block";
-    $(this).removeClass('nostate-border');
-    $(this).addClass('invalid-border');
-  } else{
-  	document.getElementById("error-zip").style.display = "block";
-    $(this).removeClass('nostate-border');
-  	$(this).addClass('valid-border');
-  }
-})
-</script>
+
   <script>
     if ($(".dsg-menu-button").hasClass('w--open')){
     		console.log("not scrollable")

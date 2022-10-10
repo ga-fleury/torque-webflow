@@ -939,6 +939,73 @@ $("#btn-start-now", registrationFormContainer).on("click", function () {
 });
 
 /**
+ * This section is a mess. It is possible that the things inside here are already being done outside this code.
+ * TODO: Refactor this
+ */
+
+ document.documentElement.addEventListener('gesturestart', 
+ function (event) 
+ {
+     event.preventDefault();
+ }, false);
+
+var ww = window.innerWidth, limit = 1025;
+var refresh = function() {
+ww = window.innerWidth;
+var w = ww < limit ? (location.reload(true)) :  ( ww > limit ? (location.reload(true)) : ww=limit );
+}
+var tOut;
+window.onresize = function() {
+var resW = window.innerWidth;
+clearTimeout(tOut);
+if ( (ww > limit && resW < limit) || (ww < limit && resW > limit) ) {
+tOut = setTimeout(refresh, 100);
+}
+};
+
+const isEmpty = str => !str.trim().length;
+var x1 = document.getElementById("zip-code-field");
+
+document.getElementById("zip-code-field").addEventListener("input", function() {
+if( isEmpty(this.value) ) {
+$('#error-zip').css('display', 'none');
+$('input[data-name="Fleet_Location__c"]').removeAttr('required');
+$(this).removeClass('invalid-border');
+$(this).addClass('valid-border');
+} else {
+$('#error-zip').css('display', 'block');
+$(this).removeClass('valid-border');
+
+$('input[data-name="Fleet_Location__c"]').attr('required');
+}
+});
+
+window.addEventListener('click', function(e){
+if (document.getElementById('zip-code-field').contains(e.target)){
+$('#error-zip').css('display', 'block');
+$(this).removeClass('nostate-border');
+$(this).addClass('invalid-border');
+} else{
+$('#error-zip').css('display', 'block');
+$(this).removeClass('nostate-border');
+$(this).addClass('valid-border');
+}
+})
+
+if ($(".dsg-menu-button").hasClass('w--open')){
+    $(".dsg-body--sample").addClass("not-scrollable");
+}else{
+ $(".dsg-body--sample").removeClass("not-scrollable");
+};
+
+if ($("#button1").hasClass('w--open')){
+ $(".dsg-body--sample").addClass("not-scrollable");
+}else{
+ $(".dsg-body--sample").removeClass("not-scrollable");
+};
+
+
+/**
  *  Checkbox Icons Correction - When window is less than 992px and the checkbox becomes horizontal,
  *  Webflow messes up the order of checkbox -> icon -> checkbox label. This corrects this.
  */
@@ -1021,13 +1088,23 @@ function finalFormSubmission() {
     const serialize = $("form").serialize();
     const UTM_URL = serialize.concat(`&${pageUTMs.replace("?", "")}`);
     const finalQuery = UTM_URL.concat(
-        "&Campaign_ID__c=7018B000000Hw6iQAC&GCLID__c=testing_gclid"
+        "&Campaign_ID__c=7015f000000dA8EAAU&GCLID__c=testing_gclid"
     );
     const URL =
-        "https://rydermm--qa.my.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&debug=1&debugEmail=mobilemaintenance@doublenines.co&oid=00D8B0000008hPZ&";
+        "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=00D5f000005uI9y";
     const finalURL = URL.concat(finalQuery);
 
     fetch(finalURL, {
         method: "POST",
-    });
+    })
+    .then((response) => {
+        if (response.ok) {
+            dataLayer.push({'event': 'leadSubmission:success'});
+        } else if (!response.ok) {
+            throw new Error('Network response was not OK');
+        }
+    })
+    .catch((error) => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });;
 }
