@@ -35,7 +35,7 @@ function radioIn() {
     if (!$(this).find(".w-radio-input").is(":checked")) {
         $(this).find(".radio-inner").addClass("hover");
     }
-    $(this).css("border", "2px solid transparent");
+    $(this).css("border", "2px solid #ff6a13");
 }
 
 function radioOut() {
@@ -46,7 +46,7 @@ function radioOut() {
 }
 
 function checkboxIn() {
-    $(this).css("border", "2px solid transparent");
+    $(this).css("border", "2px solid #ff6a13");
 }
 
 function checkboxOut() {
