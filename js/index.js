@@ -988,10 +988,10 @@ $().ready(function () {
  *  Menu Open Check
  */
 
-const navButtons = $("#button1,#button2");
+const navMenuButtons = $("#button1,#button2");
 let menuOpen = false;
 
-navButtons.on("click", function () {
+navMenuButtons.on("click", function () {
     if (menuOpen === false) {
         $("body").addClass("overflow-hidden");
         menuOpen = !menuOpen;
@@ -1001,9 +1001,9 @@ navButtons.on("click", function () {
     }
 });
 
-const contactButtons = $("#contact-over, #contact-over2");
+const navLinks = $("#contact-over, #contact-over2, #about-over, #about-over2");
 
-contactButtons.on("click", function () {
+navLinks.on("click", function () {
     $("body").removeClass("overflow-hidden");
     menuOpen = false;
 });
