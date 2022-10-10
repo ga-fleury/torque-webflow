@@ -988,22 +988,16 @@ $().ready(function () {
  *  Menu Open Check
  */
 
-if ($(".bg-menu-overlay").is(":visible")) {
-    $("body").addClass("fixed-position");
-} else {
-    $("body").removeClass("fixed-position");
-}
-
-const navButtons = $(
-    "#button1,#about-over,#contact-over"
-);
-
-navButtons.on("click", function () {
+$("#button1").on("click", function () {
     if ($("#navshadow").is(":hidden")) {
         $("body").addClass("overflow-hidden");
     } else {
         $("body").removeClass("overflow-hidden");
     }
+});
+
+$("#contact-over").on("click", function () {
+        $("body").removeClass("overflow-hidden");
 });
 /**
  * Gets all the UTMs being passed as soon as the use enters the page
