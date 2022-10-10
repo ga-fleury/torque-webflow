@@ -998,7 +998,9 @@ navButtons.on("click", function () {
     }
 });
 
-$("#contact-over").on("click", function () {
+const contactButtons = $("#contact-over, #contact-over2");
+
+contactButtons.on("click", function () {
         $("body").removeClass("overflow-hidden");
 });
 /**
