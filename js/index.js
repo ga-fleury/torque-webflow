@@ -988,20 +988,24 @@ $().ready(function () {
  *  Menu Open Check
  */
 
- const navButtons = $("#button1,#button2");
+const navButtons = $("#button1,#button2");
+let menuOpen = false;
 
 navButtons.on("click", function () {
-    if ($(".nav-shadow").is(":hidden")) {
+    if (menuOpen === false) {
         $("body").addClass("overflow-hidden");
+        menuOpen = !menuOpen;
     } else {
         $("body").removeClass("overflow-hidden");
+        menuOpen = !menuOpen;
     }
 });
 
 const contactButtons = $("#contact-over, #contact-over2");
 
 contactButtons.on("click", function () {
-        $("body").removeClass("overflow-hidden");
+    $("body").removeClass("overflow-hidden");
+    menuOpen = false;
 });
 /**
  * Gets all the UTMs being passed as soon as the use enters the page
