@@ -19,14 +19,13 @@ $("input[type=radio]").each(function () {
 /**
  * Sets the correct values for the checkboxes since Webflow won't let you do this
  */
- $("#check11").attr("value", "Preventive Maintenance");
- $("#check12").attr("value", "Follow Up Repair");
- $("#check13").attr("value", "Other");
- $("#check21").attr("value", "Trucks");
- $("#check22").attr("value", "Tractors");
- $("#check23").attr("value", "Trailers");
- $("#check24").attr("value", "Others");
- 
+$("#check11").attr("value", "Preventive Maintenance");
+$("#check12").attr("value", "Follow Up Repair");
+$("#check13").attr("value", "Other");
+$("#check21").attr("value", "Trucks");
+$("#check22").attr("value", "Tractors");
+$("#check23").attr("value", "Trailers");
+$("#check24").attr("value", "Others");
 
 /**
  * Radio Button hover effects
@@ -995,6 +994,17 @@ if ($(".bg-menu-overlay").is(":visible")) {
     $("body").removeClass("fixed-position");
 }
 
+const navButtons = $(
+    "#button1,#about-over,#contact-over"
+);
+
+navButtons.on("click", function () {
+    if ($("#navshadow").is(":hidden")) {
+        $("body").addClass("overflow-hidden");
+    } else {
+        $("body").removeClass("overflow-hidden");
+    }
+});
 /**
  * Gets all the UTMs being passed as soon as the use enters the page
  */
@@ -1019,4 +1029,3 @@ function finalFormSubmission() {
         method: "POST",
     });
 }
-

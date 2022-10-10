@@ -27,6 +27,10 @@ input[type="radio"] {
     position: fixed;
 }
 
+.overflow-hidden {
+    overflow: hidden;
+}
+
 .radio-outer {
     min-width: 22px;
     min-height: 22px;
