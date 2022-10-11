@@ -1088,7 +1088,7 @@ function finalFormSubmission() {
     const serialize = $("form").serialize();
     const UTM_URL = serialize.concat(`&${pageUTMs.replace("?", "")}`);
     const finalQuery = UTM_URL.concat(
-        "&Campaign_ID__c=7015f000000dA8EAAU&GCLID__c=testing_gclid"
+        "&Campaign_ID__c=7015f000000dA8EAAU"
     );
     const URL =
         "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=00D5f000005uI9y";
