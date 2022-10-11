@@ -943,67 +943,76 @@ $("#btn-start-now", registrationFormContainer).on("click", function () {
  * TODO: Refactor this
  */
 
- document.documentElement.addEventListener('gesturestart', 
- function (event) 
- {
-     event.preventDefault();
- }, false);
+document.documentElement.addEventListener(
+    "gesturestart",
+    function (event) {
+        event.preventDefault();
+    },
+    false
+);
 
-var ww = window.innerWidth, limit = 1025;
-var refresh = function() {
-ww = window.innerWidth;
-var w = ww < limit ? (location.reload(true)) :  ( ww > limit ? (location.reload(true)) : ww=limit );
-}
+var ww = window.innerWidth,
+    limit = 1025;
+var refresh = function () {
+    ww = window.innerWidth;
+    var w =
+        ww < limit
+            ? location.reload(true)
+            : ww > limit
+            ? location.reload(true)
+            : (ww = limit);
+};
 var tOut;
-window.onresize = function() {
-var resW = window.innerWidth;
-clearTimeout(tOut);
-if ( (ww > limit && resW < limit) || (ww < limit && resW > limit) ) {
-tOut = setTimeout(refresh, 100);
-}
+window.onresize = function () {
+    var resW = window.innerWidth;
+    clearTimeout(tOut);
+    if ((ww > limit && resW < limit) || (ww < limit && resW > limit)) {
+        tOut = setTimeout(refresh, 100);
+    }
 };
 
-const isEmpty = str => !str.trim().length;
+const isEmpty = (str) => !str.trim().length;
 var x1 = document.getElementById("zip-code-field");
 
-document.getElementById("zip-code-field").addEventListener("input", function() {
-if( isEmpty(this.value) ) {
-$('#error-zip').css('display', 'none');
-$('input[data-name="Fleet_Location__c"]').removeAttr('required');
-$(this).removeClass('invalid-border');
-$(this).addClass('valid-border');
-} else {
-$('#error-zip').css('display', 'block');
-$(this).removeClass('valid-border');
+document
+    .getElementById("zip-code-field")
+    .addEventListener("input", function () {
+        if (isEmpty(this.value)) {
+            $("#error-zip").css("display", "none");
+            $('input[data-name="Fleet_Location__c"]').removeAttr("required");
+            $(this).removeClass("invalid-border");
+            $(this).addClass("valid-border");
+        } else {
+            $("#error-zip").css("display", "block");
+            $(this).removeClass("valid-border");
 
-$('input[data-name="Fleet_Location__c"]').attr('required');
-}
+            $('input[data-name="Fleet_Location__c"]').attr("required");
+        }
+    });
+
+window.addEventListener("click", function (e) {
+    if (document.getElementById("zip-code-field").contains(e.target)) {
+        $("#error-zip").css("display", "block");
+        $(this).removeClass("nostate-border");
+        $(this).addClass("invalid-border");
+    } else {
+        $("#error-zip").css("display", "block");
+        $(this).removeClass("nostate-border");
+        $(this).addClass("valid-border");
+    }
 });
 
-window.addEventListener('click', function(e){
-if (document.getElementById('zip-code-field').contains(e.target)){
-$('#error-zip').css('display', 'block');
-$(this).removeClass('nostate-border');
-$(this).addClass('invalid-border');
-} else{
-$('#error-zip').css('display', 'block');
-$(this).removeClass('nostate-border');
-$(this).addClass('valid-border');
-}
-})
-
-if ($(".dsg-menu-button").hasClass('w--open')){
+if ($(".dsg-menu-button").hasClass("w--open")) {
     $(".dsg-body--sample").addClass("not-scrollable");
-}else{
- $(".dsg-body--sample").removeClass("not-scrollable");
-};
+} else {
+    $(".dsg-body--sample").removeClass("not-scrollable");
+}
 
-if ($("#button1").hasClass('w--open')){
- $(".dsg-body--sample").addClass("not-scrollable");
-}else{
- $(".dsg-body--sample").removeClass("not-scrollable");
-};
-
+if ($("#button1").hasClass("w--open")) {
+    $(".dsg-body--sample").addClass("not-scrollable");
+} else {
+    $(".dsg-body--sample").removeClass("not-scrollable");
+}
 
 /**
  *  Checkbox Icons Correction - When window is less than 992px and the checkbox becomes horizontal,
@@ -1051,9 +1060,7 @@ $().ready(function () {
     }
 });
 
-/**
- *  Menu Open Check
- */
+// Menu Open Check
 
 const navMenuButtons = $("#button1,#button2");
 let menuOpen = false;
@@ -1068,7 +1075,7 @@ navMenuButtons.on("click", function () {
     }
 });
 
-const navLinks = $("#contact-over, #contact-over2, #about-over, #about-over2");
+const navLinks = $("#contact-over, #contact-over2");
 
 navLinks.on("click", function () {
     $("body").removeClass("overflow-hidden");
@@ -1083,28 +1090,66 @@ const pageUTMs = window.location.search;
  *  Final Form Submission Function
  */
 
+function splitFirstAndLastName(str) {
+    // separates the first_name= input field from the string
+    var slicedName = str.substring(
+        str.indexOf("first_name"),
+        str.indexOf("&", str.indexOf("first_name"))
+    );
+    // gets last name
+    var lastName = slicedName.substring(
+        slicedName.indexOf(`%20`) + 3,
+        slicedName.length
+    );
+
+    //checks wether user inputted only one name or more than one and acts accordingly
+    if (slicedName.includes('%20')) {
+        var appendedURL =
+        str.slice(0, str.indexOf("%20", str.indexOf("first_name"))) +
+        `&last_name=${lastName}&` +
+        str.slice(str.indexOf("&", str.indexOf("first_name")) + 1);
+    } else {
+        var appendedURL =
+        str.slice(0, str.indexOf("&", str.indexOf("first_name"))) +
+        `&last_name=&` +
+        str.slice(str.indexOf("&", str.indexOf("first_name")) + 1);
+    }
+
+    return str = appendedURL
+}
+
+/**
+ * first_name: values.name.substring(0, values.name.indexOf(' ')),
+      last_name: values.name.substring(values.name.indexOf(' ') + 1),
+ */
+
 function finalFormSubmission() {
     // serialize takes the form fields name and value and creates query string
     const serialize = $("form").serialize();
+    var namesFixed = splitFirstAndLastName(serialize);
+    console.log(namesFixed)
     const UTM_URL = serialize.concat(`&${pageUTMs.replace("?", "")}`);
     const finalQuery = UTM_URL.concat(
-        "&Campaign_ID__c=7015f000000dA8EAAU"
+        "Campaign_ID__c=7015f000000dA8EAAU&GCLID__c=gclid"
     );
     const URL =
-        "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=00D5f000005uI9y";
+        "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=00D5f000005uI9y&";
     const finalURL = URL.concat(finalQuery);
 
     fetch(finalURL, {
         method: "POST",
     })
-    .then((response) => {
-        if (response.ok) {
-            dataLayer.push({'event': 'leadSubmission:success'});
-        } else if (!response.ok) {
-            throw new Error('Network response was not OK');
-        }
-    })
-    .catch((error) => {
-        console.error('There has been a problem with your fetch operation:', error);
-      });;
+        .then((response) => {
+            if (response.ok) {
+                dataLayer.push({ event: "leadSubmission:success" });
+            } else if (!response.ok) {
+                throw new Error("Network response was not OK");
+            }
+        })
+        .catch((error) => {
+            console.error(
+                "There was a problem with your fetch operation:",
+                error
+            );
+        });
 }
