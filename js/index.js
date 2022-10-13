@@ -1075,7 +1075,7 @@ navMenuButtons.on("click", function () {
     }
 });
 
-const navLinks = $("#contact-over, #contact-over2");
+const navLinks = $("#contact-over, #contact-over2,  #about-over, #about-over2, #login, #login2");
 
 navLinks.on("click", function () {
     $("body").removeClass("overflow-hidden");
@@ -1127,10 +1127,9 @@ function finalFormSubmission() {
     // serialize takes the form fields name and value and creates query string
     const serialize = $("form").serialize();
     var namesFixed = splitFirstAndLastName(serialize);
-    console.log(namesFixed)
-    const UTM_URL = serialize.concat(`&${pageUTMs.replace("?", "")}`);
+    const UTM_URL = namesFixed.concat(`&${pageUTMs.replace("?", "")}`);
     const finalQuery = UTM_URL.concat(
-        "Campaign_ID__c=7015f000000dA8EAAU&GCLID__c=gclid"
+        "&Campaign_ID__c=7015f000000dA8EAAU&GCLID__c="
     );
     const URL =
         "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=00D5f000005uI9y&";
