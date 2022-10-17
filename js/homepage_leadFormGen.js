@@ -1,3 +1,5 @@
+console.log('silly')
+
 /**
  * Removes all sucesses and fails from the different form snippets
  */
