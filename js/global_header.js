@@ -27,3 +27,7 @@ $("#login2").on("click", function () {
     $('#button2').triggerHandler('tap');
     menuOpen = false;
 });
+$("#login3").on("click", function () {
+    $('#button2').triggerHandler('tap');
+    menuOpen = false;
+});
