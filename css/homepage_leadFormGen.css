@@ -1,0 +1,273 @@
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.orange-bullets li:before  {
+    content: "●";
+    font-size: 10px;
+    margin-left: -14px;
+    padding-right: 8px;
+    vertical-align: 12%;
+    color: #ff6a13;
+}
+
+.blue-bullets li:before  {
+    content: "●";
+    font-size: 10px;
+    margin-left: -14px;
+    padding-right: 8px;
+    vertical-align: 12%;
+    color: #0033a0;
+}
+
+.dsg-nav-link {
+    font-weight: 400 !important;
+}
+
+.list--bullets {
+    font-weight: 400;
+    list-style: none !important;
+}
+
+
+@media screen and (max-width: 480px){
+	.bg-nav {
+    opacity: 1 !important;
+	}
+}
+
+.non-clikable{
+	cursor: default !important;
+}
+
+html {
+    overscroll-behavior: none;
+}
+
+body {
+    overscroll-behavior: none;
+}
+
+.btn--prm-med-3{
+  cursor: pointer !important;
+}
+
+/* Webflow default breakpoints */
+
+w-slider{
+	height: auto !important;
+}
+
+.container-col-12 {
+    margin: 0 auto !important;
+}
+
+
+@media screen and (max-width: 767px) {
+
+}
+
+@media screen and (max-width: 479px) {
+
+}
+
+
+/* Classes from Torque 1.0 */
+
+.no-select {
+  user-select: none;
+  -webkit-user-select: none; /*Safari*/
+  -moz-user-select: none; /*Firefox*/
+}
+
+.checkbox-label {
+  user-select: none;
+  -webkit-user-select: none; /*Safari*/
+  -moz-user-select: none; /*Firefox*/
+ }
+ 
+ .checkbox-big {
+  user-select: none;
+  -webkit-user-select: none; /*Safari*/
+  -moz-user-select: none; /*Firefox*/
+ }
+ 
+  .big-radio {
+  user-select: none;
+  -webkit-user-select: none; /*Safari*/
+  -moz-user-select: none; /*Firefox*/
+ }
+
+.disabled {
+    background-color: #c0c0c0 !important;
+  	cursor: not-allowed;
+  	pointer-events: all !important;
+}
+
+.disabled .is-txt-form-button{
+		color: #737373 !important;
+}
+
+.disabled .text-block{
+		color: #737373 !important;
+}
+
+.disabled .last-button{
+		color: #737373 !important;
+}
+
+.disabled:hover {
+    background-color: #c0c0c0 !important;
+    color: #737373 !important;
+}
+
+
+.disabled:hover .is-txt-form-button{
+		color: #737373 !important;
+}
+
+.disabled:hover .text-block{
+	color: #737373 !important;
+}
+
+.disabled:hover .last-button {
+    color: #737373 !important;
+}
+
+
+/*Gabriel classes*/
+
+
+
+
+
+
+
+
+.display-flex {
+	display: inline-flex;
+  position: relative !important;
+}
+
+.translate-x-1px {
+  transform: translateX(-1702px) !important;
+}
+
+.translate-x2-1px {
+  transform: translateX(-3400px) !important;
+}
+
+
+.valid-border{
+	border: 2px solid #01319a !important;
+}
+
+.invalid-border{
+	border: 2px solid red !important;
+}
+
+.nostate-border{
+	border: 2px solid #e5e7eb !important;
+}
+
+
+/*Gabriel classes*/
+
+
+.radio-button-label {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+  .c-howitworks-left ol {
+    counter-reset: item;
+    @apply ml-6;
+  }
+  .c-howitworks-left ol > li {
+    counter-increment: item;
+    @apply pb-14 border-l-2 #0033A0 border-dashed flex items-center;
+  }
+  .c-howitworks-left ol > li:first-child {
+    @apply items-start sm:items-center;
+  }
+  .c-howitworks-left ol > li:last-child {
+    @apply border-0 items-start md:items-center lg:items-start xl:items-center;
+  }
+  .c-howitworks-left ol > li:before {
+    content: counter(item);
+    @apply bg-torque-blue text-white text-2xl px-4 py-2 mr-3 -ml-6 text-center rounded-sm;
+  }
+  
+
+.checked {
+    background-color: #0033A0;
+    border: 2px solid rgb(255, 106, 19);
+}
+
+.color-checked {
+    color: #0033A0;
+}
+
+input[type="radio"] {
+	accent-color: #0F1847;
+}
+
+#btn-start-now {
+    cursor: pointer;
+}
+
+.fixed-position {
+    position: fixed;
+}
+
+.radio-outer {
+    min-width: 22px;
+    min-height: 22px;
+    border: 1px solid rgba(0, 0, 0, 0.24);
+    border-radius: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 22px;
+    margin-bottom: 22px;
+}
+
+.radio-button-label{
+	text-align: left;
+}
+
+.radio-outer.active {
+    background-color: #0033A0;
+    border: 1px solid #0F1847;
+}
+
+.radio-outer.active .radio-inner{
+    min-width: 8px;
+    min-height: 8px;
+    border: 1px white;
+    background-color: #fff;
+    border-radius: 100%;
+}
+
+.radio-inner {
+    min-width: 8px;
+    min-height: 8px;
+    background-color: #fff;
+    border-radius: 100%;
+}
+
+.radio-inner.hover {
+    background-color: #0033A0;
+}
+
+.checkbox-big{
+  user-select:none;
+  -moz-user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+  -ms-user-select:none;
+}
+
+
+
