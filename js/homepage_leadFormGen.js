@@ -1062,27 +1062,6 @@ $().ready(function () {
     }
 });
 
-// Menu Open Check
-
-const navMenuButtons = $("#button1,#button2");
-let menuOpen = false;
-
-navMenuButtons.on("click", function () {
-    if (menuOpen === false) {
-        $("body").addClass("overflow-hidden");
-        menuOpen = !menuOpen;
-    } else {
-        $("body").removeClass("overflow-hidden");
-        menuOpen = !menuOpen;
-    }
-});
-
-const navLinks = $("#contact-over, #contact-over2,  #about-over, #about-over2, #login, #login2");
-
-navLinks.on("click", function () {
-    $("body").removeClass("overflow-hidden");
-    menuOpen = false;
-});
 /**
  * Gets all the UTMs being passed as soon as the use enters the page
  */
