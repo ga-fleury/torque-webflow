@@ -6765,6 +6765,11 @@ h1 {
     height: 5rem;
   }
 
+  .dsg_container-area.footer.is-right.no-padding.footer-2 {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
   .is-h3 {
     font-size: 2rem;
   }
@@ -7532,6 +7537,12 @@ h1 {
     -webkit-justify-content: flex-start;
     -ms-flex-pack: start;
     justify-content: flex-start;
+  }
+
+  .dsg_container-area.footer.is-right.no-padding.footer-2 {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   .dsg_container-area.footer.no-padding {
