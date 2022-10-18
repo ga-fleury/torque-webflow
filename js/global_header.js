@@ -34,20 +34,16 @@ $("#login1").on("click", function () {
 $(window).on("resize", function () {
     if (menuOpen) {
         $("#navshadow").addClass("navshadow-display");
-        console.log("menu opened");
     } else {
         $("#navshadow").removeClass("navshadow-display");
-        console.log("menu closed");
     }
 });
 
 $(window).on("orientationchange", function () {
     if (menuOpen) {
-        $("#navshadow").css(["display", "block", "opacity", "1"]);
-        console.log("menu opened");
+        $("#navshadow").addClass("navshadow-display");
     } else {
         $("#navshadow").removeClass("navshadow-display");
-        console.log("menu closed");
     }
 });
 
@@ -61,3 +57,5 @@ $("#login3").on("click", function () {
     $("#button2").triggerHandler("tap");
     menuOpen = false;
 });
+
+console.log('global header loaded')
