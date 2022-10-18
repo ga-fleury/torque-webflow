@@ -1720,6 +1720,10 @@ h1 {
   display: none;
 }
 
+.dsg-nav-link.desktop-hidden {
+  display: none;
+}
+
 .is-margin-b-80 {
   margin-bottom: 5em;
 }
@@ -6160,6 +6164,11 @@ h1 {
     text-align: right;
   }
 
+  .dsg-nav-link.desktop-hidden {
+    display: block;
+    text-align: center;
+  }
+
   .dsg-nav_menu {
     margin-top: -2px;
     -webkit-box-orient: vertical;
@@ -6800,6 +6809,11 @@ h1 {
   .dsg-table-cell.padding.is-margin-b-32 {
     display: block;
     margin-right: auto;
+  }
+
+  .dsg-table-cell.is-centered {
+    margin-right: auto;
+    margin-left: auto;
   }
 
   .dsg-table_header-headlines-spacing {
