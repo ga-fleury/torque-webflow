@@ -98,7 +98,7 @@ submitButton.on("click", function () {
     referralSubmit();
     referralForm.detach();
     referralFormWrapper.append(
-        "<h2 class='thank-you-title'>Thank you for submitting your refferal</h2><br><p class='thank-you-sub'>some other message here</p>"
+        "<div class='thank-you-wrapper'><h2 class='thank-you-title'>Thank you for submitting your refferal</h2><br><p class='thank-you-sub'>some other message here</p></div>"
     );
     console.log(
         "%cLead Created Successfully",
