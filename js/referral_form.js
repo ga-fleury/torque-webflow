@@ -17,7 +17,7 @@ const stateField = $("#state");
 const zipCodeField = $("#zip-code");
 
 const referralFirstNameField = $("#referral-first-name");
-const referraLlastNameField = $("#referral-last-name");
+const referralLastNameField = $("#referral-last-name");
 const referralSAPField = $("#referral-SAP");
 const referralCompanyEmailField = $("#referral-company-email");
 
@@ -26,6 +26,13 @@ const commentsField = $("#comments");
 const submitButton = $("#referral-submit");
 const referralForm = $("#referral-form");
 const referralFormWrapper = $("#referral-form-wrapper");
+
+const requiredTextFields = $(
+    "#first-name, #last-name, #company-name,#referral-first-name, #referral-last-name, #referral-SAP, #referral-company-email"
+);
+const requiredDropdownFields = $(
+    "#state, #fleet-size"
+);
 
 /**
  * Regular expressions for each type of validation
@@ -46,7 +53,7 @@ function validFieldCheck(field, validationRegex) {
         !$(`#error-${field.attr("id")}`).length
     ) {
         field.after(
-            `<p id='error-${field.attr("id")}' style='color: red;'>
+            `<p id='error-${field.attr("id")}' class='error-message' style='color: red;'>
             Please enter a valid value.
             </p>`
         );
@@ -76,10 +83,47 @@ zipCodeField.keyup(function () {
 });
 
 submitButton.on("click", function () {
+    checkTextField(firstNameField);
+    checkTextField(lastNameField);
+    checkTextField(companyNameField);
+    checkTextField(phoneNumberField);
+    checkTextField(referralFirstNameField);
+    checkTextField(referralLastNameField);
+    checkTextField(referralSAPField);
+    checkTextField(referralCompanyEmailField);
+    checkDropdownField(stateField);
+    checkDropdownField(fleetSizeField);
+    
+    if(!$(".error-message").length) {
     referralSubmit();
-    referralForm.detach()
-    referralFormWrapper.append( "<h2 class='thank-you-title'>Thank you for submitting your refferal</h2><br><p class='thank-you-sub'>some other message here</p>" )
-    return false;
+    referralForm.detach();
+    referralFormWrapper.append(
+        "<h2 class='thank-you-title'>Thank you for submitting your refferal</h2><br><p class='thank-you-sub'>some other message here</p>"
+    );
+    console.log(
+        "%cLead Created Successfully",
+        "color:#afff94;font-size:12px;"
+      );
+    }
+});
+
+requiredTextFields.each(function () {
+    $(this).keyup(function () {
+        if (
+            $(this).val().length > 0 &&
+            $(`#error-${$(this).attr("id")}`).length
+        ) {
+            $(`#error-${$(this).attr("id")}`).detach();
+        }
+    });
+});
+
+requiredDropdownFields.each(function () {
+    $(this).change(function () {
+        if ($(`#error-${$(this).attr("id")}`).length) {
+            $(`#error-${$(this).attr("id")}`).detach();
+        }
+    });
 });
 
 //------------------------------- SUBMIT FUNCTION ---------------------------------
@@ -89,6 +133,7 @@ submitButton.on("click", function () {
  */
 
 const pageUTMs = window.location.search;
+
 function referralSubmit() {
     const serialize = $("form").serialize();
     const UTM_URL = serialize.concat(`&${pageUTMs.replace("?", "")}`);
@@ -102,4 +147,34 @@ function referralSubmit() {
     fetch(finalURL, {
         method: "POST",
     });
+}
+
+/**
+ * required fields are
+ * first name, last name
+ * company name
+ * phone number
+ * fleet size
+ * state
+ * and all referral infos
+ */
+
+function checkTextField(field) {
+    if (field.val().length == 0 && !$(`#error-${field.attr("id")}`).length) {
+        field.after(
+            `<p id='error-${field.attr("id")}' class='error-message' style='color: red;'>
+            Please enter a valid value.
+            </p>`
+        );
+    }
+}
+
+function checkDropdownField(field) {
+    if (field.val() == null && !$(`#error-${field.attr("id")}`).length) {
+        field.after(
+            `<p id='error-${field.attr("id")}' class='error-message' style='color: red;'>
+            Please enter a valid value.
+            </p>`
+        );
+    }
 }
