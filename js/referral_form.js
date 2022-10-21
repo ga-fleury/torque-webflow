@@ -14,7 +14,7 @@ const fleetSizeField = $("#fleet-size");
 const cityField = $("#city");
 const addressField = $("#address");
 const stateField = $("#state");
-const zipCodeField = $("#zip-code");
+const zipCodeField = $("#zip");
 
 const referralFirstNameField = $("#referral-first-name");
 const referralLastNameField = $("#referral-last-name");
