@@ -98,7 +98,7 @@ submitButton.on("click", function () {
     referralSubmit();
     referralForm.detach();
     referralFormWrapper.append(
-        "<div class='thank-you-wrapper'><h2 class='thank-you-title'>Thank you for submitting your refferal</h2><br><p class='thank-you-sub'>some other message here</p></div>"
+        "<div class='thank-you-wrapper'><h1>✔</h1><br><h2 class='thank-you-title'>You submitted a new refferral</h2><br><p class='thank-you-sub'>Your submission has been received<br>We will be in touch and contact you soon!<br>You can close this screen now.</p><a class='thank-you-link' href='https://www.torquebyryder.com/'>Go to Torque website</a></div>"
     );
     console.log(
         "%cLead Created Successfully",

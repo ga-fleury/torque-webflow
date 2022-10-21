@@ -1,0 +1,33 @@
+.thank-you-wrapper{
+    padding: 4.5em 0 7.5em;
+    width: 100%;
+    text-align: center;
+}
+
+.thank-you-wrapper h1{
+    color: #0033A0;
+}
+
+.thank-you-wrapper h2{
+    font-size: 48px;
+    color: #0033A0;
+}
+
+.thank-you-wrapper p{
+    color: #212121;
+    font-weight: 400;
+}
+
+
+.thank-you-wrapper a{
+    text-decoration: none;
+    font-size: 18px;
+    color: #0033A0;
+    border: 1px solid #0033A0;
+    padding: 0.5em 4.5em;
+    margin-top: 1em;
+    display: inline-block;
+    width: auto;
+    border-radius: 4px;;
+}
+
