@@ -19,6 +19,7 @@ const zipCodeField = $("#zip");
 const referralFirstNameField = $("#referral-first-name");
 const referralLastNameField = $("#referral-last-name");
 const referralSAPField = $("#referral-SAP");
+const referralPhoneNumber = $("#referral-phone-number");
 const referralCompanyEmailField = $("#referral-company-email");
 
 const commentsField = $("#comments");
@@ -40,7 +41,7 @@ const requiredDropdownFields = $(
 
 const phoneRegex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
 const zipCodeRegex = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
-const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const SAPRegex = /^[0-9]{1,128}$/;
 
 //------------------------------- VALIDATION FUNCTION START---------------------------------
@@ -68,6 +69,10 @@ function validFieldCheck(field, validationRegex) {
 
 phoneNumberField.keyup(function () {
     validFieldCheck(phoneNumberField, phoneRegex);
+});
+
+referralPhoneNumber.keyup(function () {
+    validFieldCheck(referralPhoneNumber, phoneRegex);
 });
 
 companyEmailField.keyup(function () {
