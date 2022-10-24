@@ -615,6 +615,8 @@ const companyInformationStep = $(
     registrationFormContainer
 );
 
+const companyInformationFields = $('#name-field, #company-name-field, #email-field')
+
 companyInformationStep
     .find("#btn-company-information-next")
     .prop("disabled", true);
@@ -637,6 +639,7 @@ $("#email-field").keyup(function () {
 let emailErrorMessageDisplayed = false;
 let isNameValid = false;
 let isCompanyNameValid = false;
+let isEmailValid = false;
 
 function validateName() {
     let inputValue = $("#name-field").val();
@@ -661,28 +664,43 @@ function validateCompanyName() {
 function validateEmail() {
     let isValidEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let inputValue = $("#email-field").val();
-    if (inputValue.match(isValidEmail) && isNameValid && isCompanyNameValid) {
-        $("#btn-company-information-next").removeClass("disabled");
-        $("#btn-company-information-next").attr(
-            "onclick",
-            "goToPhoneNumberStep();"
-        );
+    if (inputValue.match(isValidEmail)) {
         $("#email-field").css("border", "2px solid rgb(0 51 160)");
+        isEmailValid = true;
         if (emailErrorMessageDisplayed == true) {
             $("#error-email").detach();
             emailErrorMessageDisplayed = false;
         }
     } else {
-        $("#btn-company-information-next").addClass("disabled");
-        $("#btn-company-information-next").prop("disabled", true);
-        $("#btn-company-information-next").attr("onclick", "return false;");
         $("#email-field").css("border", "2px solid red");
+        isEmailValid = false;
         if (emailErrorMessageDisplayed == false) {
             $("#email-wrap").append(
                 "<p id='error-email' style='color: aliceblue;'>Please enter a valid value.</p>"
             );
             emailErrorMessageDisplayed = true;
         }
+    }
+}
+
+companyInformationFields.each(function() {
+    $(this).keyup(function() {
+        checkCompanyFields();
+    })
+})
+
+function checkCompanyFields() {
+    if(isEmailValid && isNameValid && isCompanyNameValid) {
+        $("#btn-company-information-next").removeClass("disabled");
+        $("#btn-company-information-next").attr(
+            "onclick",
+            "goToPhoneNumberStep();"
+        );
+        console.log("good to go")
+    } else {
+        $("#btn-company-information-next").addClass("disabled");
+        $("#btn-company-information-next").prop("disabled", true);
+        $("#btn-company-information-next").attr("onclick", "return false;");
     }
 }
 
