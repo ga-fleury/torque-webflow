@@ -44,8 +44,6 @@ const zipCodeRegex = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const SAPRegex = /^[0-9]{1,128}$/;
 
-$(stateField).attr('size', '5');
-
 //------------------------------- VALIDATION FUNCTION START---------------------------------
 
 function validFieldCheck(field, validationRegex) {
