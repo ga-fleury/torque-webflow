@@ -20,7 +20,10 @@ navMenuButtons.on("click", function () {
     }
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a0253951d348abeebbc7e0f3af9e3336f365950b
 const navLinks = $(
     "#contact-over, #contact-over2, #about-over, #about-over2, #getstarted"
 );
@@ -30,6 +33,7 @@ navLinks.on("click", function () {
     menuOpen = false;
 });
 
+<<<<<<< HEAD
 
 /* This  function makes overflow-hidden happen whenever you click in any place of the page but a specific ID */
 $('body').click(function(evt){    
@@ -48,16 +52,42 @@ $('body').click(function(evt){
 
 
 /* closes tap 1 nav-fixed inside 991px viewport */
+=======
+/* the viewport is less than 991 pixels wide */
+
+>>>>>>> a0253951d348abeebbc7e0f3af9e3336f365950b
 $("#login1").on("click", function () {
     if (!window.matchMedia("(min-width: 991px)").matches) {
         $("#button1").triggerHandler("tap");
         $("body").removeClass("overflow-hidden");
         menuOpen = false;
+<<<<<<< HEAD
     } 
+=======
+    }
+});
+
+/*  */
+$(window).on("resize", function () {
+    if (menuOpen) {
+        $("#navshadow").addClass("navshadow-display");
+    } else {
+        $("#navshadow").removeClass("navshadow-display");
+    }
+});
+
+$(window).on("orientationchange", function () {
+    if (menuOpen) {
+        $("#navshadow").addClass("navshadow-display");
+    } else {
+        $("#navshadow").removeClass("navshadow-display");
+    }
+>>>>>>> a0253951d348abeebbc7e0f3af9e3336f365950b
 });
 
 /* closes tap 2 nav-home inside 991px viewport */
 $("#login2").on("click", function () {
+<<<<<<< HEAD
     if (!window.matchMedia("(min-width: 991px)").matches) {
         $("#button2").triggerHandler("tap");
         $("body").removeClass("overflow-hidden");
@@ -83,11 +113,19 @@ $(window).on("orientationchange", function () {
 });
 
 
+=======
+    $("#button2").triggerHandler("tap");
+    $("body").removeClass("overflow-hidden");
+    menuOpen = false;
+});
+
+>>>>>>> a0253951d348abeebbc7e0f3af9e3336f365950b
 $("#login3").on("click", function () {
     $("#button2").triggerHandler("tap");
     menuOpen = false;
 });
 
+<<<<<<< HEAD
 /* This prevents page transition bug */
 window.addEventListener( "pageshow", function ( event ) {
     var historyTraversal = event.persisted || 
@@ -99,4 +137,6 @@ window.addEventListener( "pageshow", function ( event ) {
     }
   });
 
+=======
+>>>>>>> a0253951d348abeebbc7e0f3af9e3336f365950b
 console.log('global header loaded')
