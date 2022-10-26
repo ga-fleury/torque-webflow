@@ -19,7 +19,7 @@ const zipCodeField = $("#zip");
 const referralFirstNameField = $("#referral-first-name");
 const referralLastNameField = $("#referral-last-name");
 const referralSAPField = $("#referral-SAP");
-const referralPhoneNumber = $("#referral-phone-number");
+const referralPhoneNumberField = $("#referral-phone-number");
 const referralCompanyEmailField = $("#referral-company-email");
 
 const commentsField = $("#comments");
@@ -29,7 +29,7 @@ const referralForm = $("#referral-form");
 const referralFormWrapper = $("#referral-form-wrapper");
 
 const requiredTextFields = $(
-    "#first-name, #last-name, #company-name,#referral-first-name, #referral-last-name, #referral-SAP, #referral-company-email"
+    "#first-name, #last-name, #company-name, #referral-first-name, #referral-last-name, #referral-SAP"
 );
 const requiredDropdownFields = $(
     "#state, #fleet-size"
@@ -41,7 +41,7 @@ const requiredDropdownFields = $(
 
 const phoneRegex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
 const zipCodeRegex = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
-const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
 const SAPRegex = /^[0-9]{1,128}$/;
 
 //------------------------------- VALIDATION FUNCTION START---------------------------------
@@ -71,8 +71,8 @@ phoneNumberField.keyup(function () {
     validFieldCheck(phoneNumberField, phoneRegex);
 });
 
-referralPhoneNumber.keyup(function () {
-    validFieldCheck(referralPhoneNumber, phoneRegex);
+referralPhoneNumberField.keyup(function () {
+    validFieldCheck(referralPhoneNumberField, phoneRegex);
 });
 
 companyEmailField.keyup(function () {
@@ -92,10 +92,12 @@ submitButton.on("click", function () {
     checkTextField(lastNameField);
     checkTextField(companyNameField);
     checkTextField(phoneNumberField);
+    checkTextField(companyEmailField);
     checkTextField(referralFirstNameField);
     checkTextField(referralLastNameField);
     checkTextField(referralSAPField);
     checkTextField(referralCompanyEmailField);
+    checkTextField(referralPhoneNumberField);
     checkDropdownField(stateField);
     checkDropdownField(fleetSizeField);
     
@@ -175,7 +177,7 @@ function checkTextField(field) {
 }
 
 function checkDropdownField(field) {
-    if (field.val() == null && !$(`#error-${field.attr("id")}`).length) {
+    if (field.val() == "" && !$(`#error-${field.attr("id")}`).length) {
         field.after(
             `<p id='error-${field.attr("id")}' class='error-message' style='color: red;'>
             Please enter a valid value.
